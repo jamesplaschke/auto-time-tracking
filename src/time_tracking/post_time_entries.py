@@ -12,6 +12,7 @@ from .config import CATEGORY_INVESTMENT, CATEGORY_REPORTABLE
 from .display import console, print_post_preview
 from .models import ClassifiedEvent, Confidence, DayClassification
 from .rocketlane_client import (
+    auto_phase_for_project,
     check_duplicates,
     create_time_entry,
     get_phase_id,
@@ -103,6 +104,9 @@ def _build_entries(day: DayClassification) -> list[dict]:
         phase_name = classified.project.phase_name
         if (not phase_id) and phase_name:
             phase_id = get_phase_id(classified.project.project_id, phase_name)
+        # Auto-detect phase from API when no phase is configured for this project
+        if not phase_id:
+            phase_id = auto_phase_for_project(classified.project.project_id, classified.notes or "")
 
         entry = {
             "date": day.date,
@@ -198,18 +202,19 @@ def process_date(date_str: str, dry_run: bool = False, yes: bool = False) -> Non
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Post classified time entries to Rocketlane"
+        description="Post classified time entries to Rocketlane",
+        usage="post-my-time-for [date] [--week] [--dry-run] [-y]",
     )
     parser.add_argument(
-        "--date",
-        type=str,
+        "date",
+        nargs="?",
         default=None,
         help="Target date (YYYY-MM-DD). Defaults to today.",
     )
     parser.add_argument(
         "--week",
         action="store_true",
-        help="Post Mon-Fri of the current week.",
+        help="Post Mon-Fri of the week containing the given date (or today).",
     )
     parser.add_argument(
         "--dry-run",

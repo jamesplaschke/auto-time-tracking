@@ -14,6 +14,7 @@ from .display import console, print_day_summary
 from .gcal_client import fetch_events
 from .models import Confidence, DayClassification
 from .overlap import resolve_overlaps
+from .rocketlane_client import suggest_projects
 
 try:
     from zoneinfo import ZoneInfo
@@ -37,6 +38,16 @@ def process_date(target_date: date) -> DayClassification:
 
     classified = classify_events(events)
     classified = resolve_overlaps(classified)
+
+    # Attach project hints to unknown-external events
+    unknown_events = [e for e in classified if e.category.startswith("unknown-external:")]
+    if unknown_events:
+        try:
+            for event in unknown_events:
+                domain = event.category.split("unknown-external:", 1)[1].split(",")[0].strip()
+                event.project_hints = suggest_projects(domain, event.event.title)
+        except Exception:
+            pass  # hints are best-effort, don't fail the whole run
 
     tracked = [e for e in classified if not e.skip]
     total_tracked = sum(e.duration_minutes for e in tracked)
@@ -69,18 +80,19 @@ def write_output(day: DayClassification) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Classify Google Calendar events for time tracking"
+        description="Fetch and classify Google Calendar events for time tracking",
+        usage="pull-my-time-for [date] [--week]",
     )
     parser.add_argument(
-        "--date",
-        type=str,
+        "date",
+        nargs="?",
         default=None,
         help="Target date (YYYY-MM-DD). Defaults to today.",
     )
     parser.add_argument(
         "--week",
         action="store_true",
-        help="Process Mon-Fri of the current week.",
+        help="Process Mon-Fri of the week containing the given date (or today).",
     )
     args = parser.parse_args()
 

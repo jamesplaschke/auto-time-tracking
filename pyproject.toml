@@ -13,8 +13,8 @@ dependencies = [
 ]
 
 [project.scripts]
-classify = "time_tracking.classify_events:main"
-post-time = "time_tracking.post_time_entries:main"
+pull-my-time-for = "time_tracking.classify_events:main"
+post-my-time-for = "time_tracking.post_time_entries:main"
 
 [build-system]
 requires = ["hatchling"]

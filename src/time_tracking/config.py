@@ -167,6 +167,8 @@ OVERHEAD_PHASES: list[OverheadPhase] = [
             re.compile(r"\bpod\b", re.IGNORECASE),
             re.compile(r"team\s+(sync|standup|meeting|call)", re.IGNORECASE),
             re.compile(r"sprint\s+(review|retro|planning)", re.IGNORECASE),
+            # Hockey stick pod / commercial pod 1 — logged to overhead until project exists
+            re.compile(r"hockey\s*stick", re.IGNORECASE),
         ],
     ),
     OverheadPhase(
@@ -176,6 +178,7 @@ OVERHEAD_PHASES: list[OverheadPhase] = [
             re.compile(r"enabling\s+work", re.IGNORECASE),
             re.compile(r"training", re.IGNORECASE),
             re.compile(r"onboarding", re.IGNORECASE),
+            re.compile(r"\bwebinar\b", re.IGNORECASE),
         ],
     ),
     OverheadPhase(
@@ -203,6 +206,10 @@ SKIP_TITLE_PATTERNS: list[re.Pattern] = [
     re.compile(r"working\s+location", re.IGNORECASE),
     re.compile(r"\bfocus\s+time\b", re.IGNORECASE),
     re.compile(r"\bblock(ed)?\s+time\b", re.IGNORECASE),
+    # "Hold:" prefix = calendar blocker, skip it so the real events behind it are used
+    re.compile(r"^\s*hold\s*:", re.IGNORECASE),
+    # Personal / non-work activities
+    re.compile(r"\bwater\s+polo\b", re.IGNORECASE),
 ]
 
 # Events with these titles are investment (not reportable) for client projects
@@ -230,6 +237,19 @@ SUPPORT_TICKET_PATTERNS: list[re.Pattern] = [
 def get_domain(email: str) -> str:
     """Extract domain from an email address."""
     return email.rsplit("@", 1)[-1].lower()
+
+
+def find_client_by_title(title: str) -> ClientProject | None:
+    """Look up a client project by matching title patterns.
+
+    Used when no attendee domain match is found — catches solo work events
+    and internal meetings whose titles reference a client (e.g. 'philips config').
+    """
+    for client in CLIENT_PROJECTS:
+        for pattern in client.title_patterns:
+            if pattern.search(title):
+                return client
+    return None
 
 
 def find_client_by_domain(domain: str) -> ClientProject | None:

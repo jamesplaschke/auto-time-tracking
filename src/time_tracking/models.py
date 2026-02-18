@@ -70,6 +70,7 @@ class ClassifiedEvent(BaseModel):
     duration_minutes: int = 0  # after rounding
     notes: str = ""  # what goes into the time entry description
     user_override: Optional[dict] = None  # user can patch classification in JSON
+    project_hints: Optional[list[dict]] = None  # suggested projects for unknown-external events
 
 
 class DayClassification(BaseModel):

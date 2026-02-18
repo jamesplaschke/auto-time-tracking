@@ -153,6 +153,61 @@ def create_time_entry(
     return _request("/time-entries", method="POST", json_body=body)
 
 
+def get_all_projects() -> list[dict]:
+    """Fetch all Rocketlane projects, cached to cache/projects.json."""
+    cache_path = CACHE_DIR / "projects.json"
+    if cache_path.exists():
+        return json.loads(cache_path.read_text())
+
+    all_projects: list[dict] = []
+    page_token = None
+    while True:
+        params: dict = {"pageSize": 100}
+        if page_token:
+            params["pageToken"] = page_token
+        result = _request("/projects", params=params)
+        all_projects.extend(result.get("data", []))
+        pagination = result.get("pagination", {})
+        if not pagination.get("hasMore"):
+            break
+        page_token = pagination.get("nextPageToken")
+        if not page_token:
+            break
+
+    simplified = [
+        {"project_id": p["projectId"], "project_name": p["projectName"]}
+        for p in all_projects
+        if p.get("projectId") and p.get("projectName")
+    ]
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(json.dumps(simplified, indent=2))
+    return simplified
+
+
+def suggest_projects(domain: str, title: str, n: int = 5) -> list[dict]:
+    """Return top-N Rocketlane projects matching a domain/title.
+
+    Scores by word overlap: domain words weighted 3x, title words 1x.
+    """
+    projects = get_all_projects()
+    company = domain.split(".")[0].lower()  # "newclient.com" → "newclient"
+    title_words = set(title.lower().split())
+
+    scored: list[tuple[int, dict]] = []
+    for proj in projects:
+        name_lower = proj["project_name"].lower()
+        score = 0
+        # Domain company word match
+        if company in name_lower:
+            score += 3
+        # Title word matches
+        score += sum(1 for w in title_words if len(w) > 3 and w in name_lower)
+        scored.append((score, proj))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [p for _, p in scored[:n]]
+
+
 def resolve_phases_for_project(project_id: int) -> dict[str, int]:
     """Fetch phases for any project and return a name→ID mapping.
 
@@ -187,6 +242,31 @@ def get_phase_id(project_id: int, phase_name: str) -> int | None:
         if phase_name.lower() in name.lower() or name.lower() in phase_name.lower():
             return pid
     return None
+
+
+def auto_phase_for_project(project_id: int, title: str) -> int | None:
+    """Pick the best-matching phase for a project using the event title.
+
+    Scores each phase by how many title words appear in the phase name.
+    Falls back to the first phase if no words match. Returns None only if
+    the project has no phases at all.
+    """
+    phase_map = resolve_phases_for_project(project_id)
+    if not phase_map:
+        return None
+
+    title_words = set(title.lower().split())
+    best_id: int | None = None
+    best_score = -1
+
+    for name, pid in phase_map.items():
+        name_lower = name.lower()
+        score = sum(1 for w in title_words if w in name_lower)
+        if score > best_score:
+            best_score = score
+            best_id = pid
+
+    return best_id
 
 
 def update_time_entry(

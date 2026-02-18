@@ -9,6 +9,7 @@ from .config import (
     ENTERPRISE_POD_PATTERN,
     ENTERPRISE_POD_PROJECT_ID,
     ENTERPRISE_POD_PROJECT_NAME,
+    IGNORED_DOMAINS,
     KETRYX_DOMAIN,
     MIN_DURATION_MINUTES,
     OVERHEAD_PHASES,
@@ -20,6 +21,7 @@ from .config import (
     SUPPORT_TICKETS_PROJECT_ID,
     VALUE_ENGINEERING_PATTERN,
     find_client_by_domain,
+    find_client_by_title,
     get_domain,
     is_investment_title,
     is_support_ticket,
@@ -93,7 +95,7 @@ def _extract_domains(event: CalendarEvent) -> tuple[set[str], set[str]]:
         if att.is_self:
             continue
         domain = get_domain(att.email)
-        if not domain:
+        if not domain or domain in IGNORED_DOMAINS:
             continue
         if domain == KETRYX_DOMAIN:
             internal_domains.add(domain)
@@ -210,6 +212,32 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
             billable=False,
             category=f"unknown-external:{unknown_domains}",
             confidence=Confidence.LOW,
+            duration_minutes=duration,
+            notes=event.title,
+        )
+
+    # Step 5.5: Title-pattern client match — catches solo work and internal meetings
+    # whose title references a client (e.g. "philips config", "Philips Daily Internal Sync")
+    client = find_client_by_title(event.title)
+    if client:
+        project_id, project_name = resolve_project(client, event.title)
+        billable_type = (
+            BillableType.INVESTMENT
+            if is_investment_title(event.title)
+            else BillableType.REPORTABLE
+        )
+        phase_name = match_client_phase(client, event.title)
+        return ClassifiedEvent(
+            event=event,
+            billable=True,
+            billable_type=billable_type,
+            category=f"client:{project_name.lower().replace(' ', '-')}",
+            project=ProjectMapping(
+                project_id=project_id,
+                project_name=project_name,
+                phase_name=phase_name,
+            ),
+            confidence=Confidence.HIGH,
             duration_minutes=duration,
             notes=event.title,
         )
