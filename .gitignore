@@ -1,0 +1,8 @@
+output/
+cache/
+.env
+token.json
+credentials.json
+__pycache__/
+*.pyc
+.venv/
