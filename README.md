@@ -8,13 +8,15 @@ Automatically pulls your Google Calendar events, classifies them into billable c
 2. **Review** — inspect the output JSON and add `user_override` to any events that need corrections
 3. **Post** — reads the reviewed JSON and posts time entries to Rocketlane with the correct project, phase, and category
 
+---
+
 ## Setup
 
 ### Prerequisites
 - Python 3.10+
 - [uv](https://docs.astral.sh/uv/) (`brew install uv`)
-- Google Calendar API credentials
-- Rocketlane API key
+- Google Calendar API credentials (see below)
+- Rocketlane API key (see below)
 
 ### Install
 
@@ -24,33 +26,58 @@ cd auto-time-tracking
 uv sync
 ```
 
-### Google Calendar credentials
+---
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com) and create a project
-2. Enable the **Google Calendar API**
-3. Create **OAuth 2.0 credentials** (Desktop app) and download as `credentials.json`
-4. Place `credentials.json` in the project root
-5. On first run, a browser window will open to authorize access — this creates `token.json`
+### 1. Google Calendar credentials
 
-### Rocketlane API key
+You need a `credentials.json` file from Google Cloud to allow this tool to read your calendar.
 
-Copy `.env.example` to `.env` and add your key:
+1. Go to [Google Cloud Console](https://console.cloud.google.com) and **create a new project** (or select an existing one)
+2. In the left sidebar, go to **APIs & Services → Library**
+3. Search for **Google Calendar API** and click **Enable**
+4. Go to **APIs & Services → OAuth consent screen**
+   - Choose **Internal** if your Google account is a Workspace account (recommended), or **External** if personal
+   - Fill in an app name (e.g. "Auto Time Tracking") and your email — the rest can be left blank
+   - Click **Save and Continue** through the remaining screens
+5. Go to **APIs & Services → Credentials**
+   - Click **+ Create Credentials → OAuth client ID**
+   - Application type: **Desktop app**
+   - Name it anything (e.g. "auto-time-tracking")
+   - Click **Create**
+6. Click the **download icon** next to your new credential to download the JSON file
+7. Rename it to `credentials.json` and place it in the **project root** (same folder as `pyproject.toml`)
+
+**First run:** A browser window will open asking you to authorize access to your Google Calendar. After approving, a `token.json` file is created automatically — you won't be prompted again unless the token expires.
+
+> `credentials.json` and `token.json` are listed in `.gitignore` and will never be committed.
+
+---
+
+### 2. Rocketlane API key
+
+1. In Rocketlane, go to **Settings → API**
+2. Copy your API key
+3. In the project root, copy the example env file and paste in your key:
 
 ```bash
 cp .env.example .env
 ```
 
+Then edit `.env`:
+
 ```
-ROCKETLANE_API_KEY=rl-your-key-here
+ROCKETLANE_API_KEY=your-key-here
 ```
 
-Find your key in Rocketlane under **Settings → API**.
+> `.env` is listed in `.gitignore` and will never be committed.
 
 ---
 
 ## Usage
 
-### Pull your calendar for a day
+### In the terminal
+
+**Pull your calendar for a day:**
 
 ```bash
 uv run pull-my-time-for 2026-02-18
@@ -60,7 +87,7 @@ uv run pull-my-time-for --week   # Mon–Fri of current week
 
 Output is written to `output/YYYY-MM-DD.json`. Review it and add `user_override` to any events that need corrections before posting.
 
-### Post time entries to Rocketlane
+**Post time entries to Rocketlane:**
 
 ```bash
 uv run post-my-time-for 2026-02-18
@@ -70,6 +97,31 @@ uv run post-my-time-for --week -y              # post full week
 ```
 
 Duplicate detection prevents double-posting — safe to run multiple times.
+
+---
+
+### In Claude Code or Cursor
+
+You can use this tool conversationally inside Claude Code or Cursor by describing what you want in plain English. The AI reads the output JSON, applies overrides, and runs the commands for you.
+
+**Example prompts:**
+
+> "Pull my time for today and show me what was classified."
+
+> "Post today's time to Rocketlane — skip the standup and mark the Philips session as Configuration."
+
+> "Pull and post the full week, skipping anything that's overhead."
+
+The tool works the same way under the hood — the AI just handles the pull → review → override → post loop for you instead of you editing JSON manually.
+
+**To enable this in Claude Code**, add the following to your project's `CLAUDE.md` or just describe your workflow once at the start of a session:
+
+```
+I use auto-time-tracking. The commands are:
+  uv run pull-my-time-for [date|--week]
+  uv run post-my-time-for [date|--week] [--dry-run] [-y]
+Output is in output/YYYY-MM-DD.json. I will describe any overrides I need and you apply them before posting.
+```
 
 ---
 
@@ -139,8 +191,8 @@ ClientProject(
     domains=["acme.com"],
     default_phase_name="Implementation",
     phase_patterns=[
-        (re.compile(r"\b(prep|planning)\b", re.IGNORECASE), "Planning"),
-        (re.compile(r"\bsupport\b", re.IGNORECASE), "Support"),
+        (re.compile(r"(prep|planning)", re.IGNORECASE), "Planning"),
+        (re.compile(r"support", re.IGNORECASE), "Support"),
     ],
 ),
 ```
