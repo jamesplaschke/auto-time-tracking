@@ -69,7 +69,10 @@ CLIENT_PROJECTS: list[ClientProject] = [
         name="Philips - HPM (PICiX)",
         project_id=994649,
         domains=["philips.com"],
-        title_patterns=[re.compile(r"\bphilips\b", re.IGNORECASE)],
+        title_patterns=[
+            re.compile(r"\bphilips\b", re.IGNORECASE),
+            re.compile(r"\bproduct\s+trio\b", re.IGNORECASE),
+        ],
         default_phase_name="Configuration",
         phase_patterns=[
             (re.compile(r"\b(prep|admin|onboard|kickoff|kick.off)\b", re.IGNORECASE), "Admin/Onboarding"),
@@ -219,6 +222,7 @@ INVESTMENT_TITLE_PATTERNS: list[re.Pattern] = [
     re.compile(r"planning", re.IGNORECASE),
     re.compile(r"strategy", re.IGNORECASE),
     re.compile(r"review", re.IGNORECASE),
+    re.compile(r"\bproduct\s+trio\b", re.IGNORECASE),
 ]
 
 # Support ticket title patterns
