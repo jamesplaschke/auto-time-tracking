@@ -24,6 +24,47 @@ def _event_icon(event) -> str:
     return "📋"
 
 
+def _truncate(s: str, n: int) -> str:
+    return s if len(s) <= n else s[:n - 1] + "…"
+
+
+def _build_table(day: DayClassification) -> str:
+    """Build a fixed-width ASCII table for the tracked events."""
+    tracked = [e for e in day.events if not e.skip]
+
+    # Column widths
+    W_TITLE = 28
+    W_PROJECT = 22
+    W_TYPE = 4   # icon
+    W_DUR = 6
+
+    header = (
+        f"{'Event':<{W_TITLE}}  {'Project':<{W_PROJECT}}  {'':>{W_TYPE}}  {'Time':>{W_DUR}}"
+    )
+    sep = "-" * len(header)
+
+    rows = [header, sep]
+    for e in tracked:
+        title = _truncate(e.event.title, W_TITLE)
+        if e.project:
+            proj = _truncate(e.project.project_name, W_PROJECT)
+        else:
+            proj = _truncate(e.category or "unclassified", W_PROJECT)
+        icon = _event_icon(e)
+        dur = _fmt_minutes(e.duration_minutes)
+        rows.append(
+            f"{title:<{W_TITLE}}  {proj:<{W_PROJECT}}  {icon:>{W_TYPE}}  {dur:>{W_DUR}}"
+        )
+
+    rows.append(sep)
+    total_dur = _fmt_minutes(day.total_tracked_minutes)
+    billable_dur = _fmt_minutes(day.total_billable_minutes)
+    summary = f"{'Total: ' + total_dur:<{W_TITLE + W_PROJECT + W_TYPE + 4}}  {'Bill: ' + billable_dur:>{W_DUR}}"
+    rows.append(summary)
+
+    return "\n".join(rows)
+
+
 def build_blocks(day: DayClassification) -> list[dict]:
     parsed = date.fromisoformat(day.date)
     day_str = parsed.strftime("%A, %B %-d, %Y")
@@ -31,9 +72,6 @@ def build_blocks(day: DayClassification) -> list[dict]:
     tracked = [e for e in day.events if not e.skip]
     skipped = [e for e in day.events if e.skip]
     low_conf = [e for e in tracked if e.confidence == Confidence.LOW]
-
-    billable_minutes = day.total_billable_minutes
-    total_minutes = day.total_tracked_minutes
 
     blocks: list[dict] = []
 
@@ -43,67 +81,49 @@ def build_blocks(day: DayClassification) -> list[dict]:
         "text": {"type": "plain_text", "text": f"Time Summary — {day_str}"},
     })
 
-    # Stats
-    stats = f"{_fmt_minutes(total_minutes)} tracked  |  {_fmt_minutes(billable_minutes)} billable"
-    blocks.append({
-        "type": "section",
-        "text": {"type": "mrkdwn", "text": stats},
-    })
-
     blocks.append({"type": "divider"})
 
-    # Tracked events
+    # Table in a code block so monospace alignment renders correctly
     if tracked:
-        lines = []
-        for e in tracked:
-            icon = _event_icon(e)
-            title = e.event.title
-            dur = _fmt_minutes(e.duration_minutes)
-            if e.project:
-                proj = e.project.project_name
-                phase = f" › {e.project.phase_name}" if e.project.phase_name else ""
-                inv = "  _(investment)_" if e.billable_type == BillableType.INVESTMENT else ""
-                lines.append(f"{icon} *{title}*\n   {proj}{phase} · {dur}{inv}")
-            else:
-                category = e.category or "unclassified"
-                lines.append(f"{icon} *{title}*\n   {category} · {dur}")
-
+        table = _build_table(day)
         blocks.append({
             "type": "section",
-            "text": {"type": "mrkdwn", "text": "\n\n".join(lines)},
+            "text": {"type": "mrkdwn", "text": f"```{table}```"},
         })
+
+    # Legend
+    blocks.append({
+        "type": "context",
+        "elements": [{"type": "mrkdwn", "text": "💰 billable · 📊 investment · 📋 overhead"}],
+    })
 
     # Low confidence warning
     if low_conf:
-        warning_lines = [f"⚠️ *{len(low_conf)} event{'s' if len(low_conf) > 1 else ''} need{'s' if len(low_conf) == 1 else ''} review (low confidence):*"]
-        for e in low_conf:
-            dur = _fmt_minutes(e.duration_minutes)
-            warning_lines.append(f"   • {e.event.title} · {dur}")
+        n = len(low_conf)
+        warning = f"⚠️ *{n} event{'s' if n > 1 else ''} need review (low confidence):*\n"
+        warning += "\n".join(f"  • {e.event.title} · {_fmt_minutes(e.duration_minutes)}" for e in low_conf)
         blocks.append({
             "type": "section",
-            "text": {"type": "mrkdwn", "text": "\n".join(warning_lines)},
+            "text": {"type": "mrkdwn", "text": warning},
         })
 
     blocks.append({"type": "divider"})
 
-    # Skipped events summary
-    context_parts = []
+    # Skipped + footer
+    footer_parts = []
     if skipped:
         skip_titles = [e.event.title for e in skipped[:5]]
         more = len(skipped) - 5
         summary = ", ".join(skip_titles)
         if more > 0:
             summary += f" +{more} more"
-        context_parts.append(f"Skipped {len(skipped)} events: {summary}")
+        footer_parts.append(f"Skipped {len(skipped)} events: {summary}")
 
-    # Footer with instructions
-    context_parts.append(
-        f"Review `output/{day.date}.json` then run:\n`post-my-time-for {day.date}`"
-    )
+    footer_parts.append(f"Review `output/{day.date}.json` then run:\n`post-my-time-for {day.date}`")
 
     blocks.append({
         "type": "section",
-        "text": {"type": "mrkdwn", "text": "\n\n".join(context_parts)},
+        "text": {"type": "mrkdwn", "text": "\n\n".join(footer_parts)},
     })
 
     return blocks
