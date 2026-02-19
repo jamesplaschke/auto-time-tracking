@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -110,6 +111,12 @@ def main() -> None:
             output_path = write_output(day)
             print_day_summary(day)
             console.print(f"[green]Written to {output_path}[/green]")
+            slack_token = os.environ.get("SLACK_BOT_TOKEN")
+            slack_user_id = os.environ.get("SLACK_USER_ID")
+            if slack_token and slack_user_id:
+                from .slack_notifier import send_day_summary
+                if send_day_summary(day, slack_user_id, slack_token):
+                    console.print("[green]✓ Slack notification sent[/green]")
         except Exception as e:
             console.print(f"[red]Error processing {target_date}: {e}[/red]")
             if len(dates) == 1:

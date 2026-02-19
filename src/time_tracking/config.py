@@ -86,6 +86,9 @@ CLIENT_PROJECTS: list[ClientProject] = [
         name="Vista Robotics",
         project_id=1000461,
         domains=["vistarobotics.com"],
+        title_patterns=[
+            re.compile(r"\bvista\b", re.IGNORECASE),
+        ],
         default_phase_name="Implementation",
         phase_patterns=[
             (re.compile(r"\b(plan|prep|email|schedule)\b", re.IGNORECASE), "Planning"),
@@ -133,8 +136,17 @@ SUPPORT_TICKETS_NAME = "Support Tickets (strategic)"
 # Value Engineering — matched by title, logged to Overhead > Enabling Work
 VALUE_ENGINEERING_PATTERN = re.compile(r"value\s+engineering", re.IGNORECASE)
 
-# Enterprise Methodology Pod — matched by title, logged to project 1000405
-ENTERPRISE_POD_PATTERN = re.compile(r"enterprise\s+(methodology|pod)", re.IGNORECASE)
+# Enterprise Account Pods — matched by title, logged to project 1000405 as billable investment
+# Covers: Enterprise Methodology Pod, Hockey Stick, POD 1, Commercial Pod 1
+ENTERPRISE_POD_PATTERN = re.compile(
+    r"enterprise\s+(methodology|pod)"
+    r"|hockey\s*stick"
+    r"|\bpod\s*1\b"
+    r"|\bpod\s+one\b"
+    r"|commercial\s+pod"
+    r"|\bcompod\b",
+    re.IGNORECASE,
+)
 ENTERPRISE_POD_PROJECT_ID = 1000405
 ENTERPRISE_POD_PROJECT_NAME = "Enterprise Methodology Pod"
 ENTERPRISE_POD_DEFAULT_PHASE_NAME = "Enterprise Pod Work Q1 2026"
@@ -167,11 +179,8 @@ OVERHEAD_PHASES: list[OverheadPhase] = [
             re.compile(r"end\s+of\s+week", re.IGNORECASE),
             re.compile(r"\b1[:\s]*1\b"),
             re.compile(r"one[\s-]?on[\s-]?one", re.IGNORECASE),
-            re.compile(r"\bpod\b", re.IGNORECASE),
             re.compile(r"team\s+(sync|standup|meeting|call)", re.IGNORECASE),
             re.compile(r"sprint\s+(review|retro|planning)", re.IGNORECASE),
-            # Hockey stick pod / commercial pod 1 — logged to overhead until project exists
-            re.compile(r"hockey\s*stick", re.IGNORECASE),
         ],
     ),
     OverheadPhase(
@@ -213,6 +222,8 @@ SKIP_TITLE_PATTERNS: list[re.Pattern] = [
     re.compile(r"^\s*hold\s*:", re.IGNORECASE),
     # Personal / non-work activities
     re.compile(r"\bwater\s+polo\b", re.IGNORECASE),
+    # Recurring internal sessions not tracked
+    re.compile(r"wiring\s+to\s+win", re.IGNORECASE),
 ]
 
 # Events with these titles are investment (not reportable) for client projects

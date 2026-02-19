@@ -138,11 +138,13 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
             notes=event.title,
         )
 
-    # Step 2.5: Check for Enterprise Methodology / Pod (title-based)
+    # Step 2.5: Check for Enterprise Account Pods (title-based)
+    # Covers: Enterprise Methodology Pod, Hockey Stick, POD 1, Commercial Pod 1
     if ENTERPRISE_POD_PATTERN.search(event.title):
         return ClassifiedEvent(
             event=event,
-            billable=False,
+            billable=True,
+            billable_type=BillableType.INVESTMENT,
             category="enterprise-pod",
             project=ProjectMapping(
                 project_id=ENTERPRISE_POD_PROJECT_ID,
