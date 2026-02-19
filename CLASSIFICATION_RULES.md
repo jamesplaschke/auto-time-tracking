@@ -29,7 +29,7 @@ Events are matched in this order (first match wins):
 | Roche nCH | 1000449 | roche.com, gene.com | — | — |
 | Roche nDP | 1001080 | roche.com, gene.com | title contains `nDP` | — |
 | Dexcom Stelo | 1000398 | dexcom.com | — | — |
-| Dexcom Strategic | 1018219 | dexcom.com | title contains `strategic` | — |
+| Dexcom Strategic | 1018219 | dexcom.com | title contains `Dexcom` | — |
 | J&J Q1 2026 | 1018147 | its.jnj.com, jnj.com | — | — |
 | Meta RL | 1000414 | meta.com, fb.com, facebook.com | — | — |
 | Inogen Post-Implementation | 1014475 | inogen.com | — | — |
@@ -41,7 +41,7 @@ Events are matched in this order (first match wins):
 
 ---
 
-## Enterprise Methodology Pod
+## Enterprise GTM Pod
 
 **Project ID:** 1000405 | **Billable type:** investment
 
@@ -120,7 +120,7 @@ Add a `re.compile(...)` to `SKIP_TITLE_PATTERNS` in `config.py` with a comment e
 
 ## Minimum Duration
 
-Events shorter than **30 minutes** are skipped. Durations are rounded to the nearest **30 minutes**.
+Events shorter than **30 minutes** are rounded up to 30 minutes. Durations are rounded to the nearest **30 minutes**.
 
 ---
 
