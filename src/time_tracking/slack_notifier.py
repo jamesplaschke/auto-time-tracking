@@ -16,16 +16,17 @@ def _fmt_minutes(minutes: int) -> str:
     return f"{m}m"
 
 
-def _event_icon(event) -> str:
-    if event.billable and event.billable_type == BillableType.REPORTABLE:
-        return "💰"
-    if event.billable and event.billable_type == BillableType.INVESTMENT:
-        return "📊"
-    return "📋"
-
 
 def _truncate(s: str, n: int) -> str:
     return s if len(s) <= n else s[:n - 1] + "…"
+
+
+def _billable_label(event) -> str:
+    if not event.billable:
+        return "non-billable"
+    if event.billable_type == BillableType.INVESTMENT:
+        return "investment"
+    return "reportable"
 
 
 def _build_table(day: DayClassification) -> str:
@@ -33,13 +34,13 @@ def _build_table(day: DayClassification) -> str:
     tracked = [e for e in day.events if not e.skip]
 
     # Column widths
-    W_TITLE = 28
+    W_TITLE = 26
     W_PROJECT = 22
-    W_TYPE = 4   # icon
+    W_TYPE = 13   # "non-billable" is 12 chars
     W_DUR = 6
 
     header = (
-        f"{'Event':<{W_TITLE}}  {'Project':<{W_PROJECT}}  {'':>{W_TYPE}}  {'Time':>{W_DUR}}"
+        f"{'Event':<{W_TITLE}}  {'Project':<{W_PROJECT}}  {'Type':<{W_TYPE}}  {'Time':>{W_DUR}}"
     )
     sep = "-" * len(header)
 
@@ -50,10 +51,10 @@ def _build_table(day: DayClassification) -> str:
             proj = _truncate(e.project.project_name, W_PROJECT)
         else:
             proj = _truncate(e.category or "unclassified", W_PROJECT)
-        icon = _event_icon(e)
+        label = _billable_label(e)
         dur = _fmt_minutes(e.duration_minutes)
         rows.append(
-            f"{title:<{W_TITLE}}  {proj:<{W_PROJECT}}  {icon:>{W_TYPE}}  {dur:>{W_DUR}}"
+            f"{title:<{W_TITLE}}  {proj:<{W_PROJECT}}  {label:<{W_TYPE}}  {dur:>{W_DUR}}"
         )
 
     rows.append(sep)
@@ -90,12 +91,6 @@ def build_blocks(day: DayClassification) -> list[dict]:
             "type": "section",
             "text": {"type": "mrkdwn", "text": f"```{table}```"},
         })
-
-    # Legend
-    blocks.append({
-        "type": "context",
-        "elements": [{"type": "mrkdwn", "text": "💰 billable · 📊 investment · 📋 overhead"}],
-    })
 
     # Low confidence warning
     if low_conf:
