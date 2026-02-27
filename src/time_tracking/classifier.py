@@ -5,6 +5,10 @@ from __future__ import annotations
 import math
 
 from .config import (
+    ENTERPRISE_GTM_POD_DEFAULT_PHASE_NAME,
+    ENTERPRISE_GTM_POD_PATTERN,
+    ENTERPRISE_GTM_POD_PROJECT_ID,
+    ENTERPRISE_GTM_POD_PROJECT_NAME,
     ENTERPRISE_POD_DEFAULT_PHASE_NAME,
     ENTERPRISE_POD_PATTERN,
     ENTERPRISE_POD_PROJECT_ID,
@@ -139,17 +143,35 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
         )
 
     # Step 2.5: Check for Enterprise Account Pods (title-based)
-    # Covers: Enterprise Methodology Pod, Hockey Stick, POD 1, Commercial Pod 1
+    # "enterprise methodology/pod" → Enterprise Methodology Pod (1000405)
     if ENTERPRISE_POD_PATTERN.search(event.title):
         return ClassifiedEvent(
             event=event,
-            billable=True,
+            billable=False,
             billable_type=BillableType.INVESTMENT,
             category="enterprise-pod",
             project=ProjectMapping(
                 project_id=ENTERPRISE_POD_PROJECT_ID,
                 project_name=ENTERPRISE_POD_PROJECT_NAME,
                 phase_name=ENTERPRISE_POD_DEFAULT_PHASE_NAME,
+            ),
+            confidence=Confidence.HIGH,
+            duration_minutes=duration,
+            notes=event.title,
+        )
+
+    # Step 2.6: Check for Enterprise GTM / Account PODs (title-based)
+    # "pod 1", "hockey stick", "commercial pod" → Enterprise Account PODs (1100677)
+    if ENTERPRISE_GTM_POD_PATTERN.search(event.title):
+        return ClassifiedEvent(
+            event=event,
+            billable=False,
+            billable_type=BillableType.INVESTMENT,
+            category="enterprise-gtm-pod",
+            project=ProjectMapping(
+                project_id=ENTERPRISE_GTM_POD_PROJECT_ID,
+                project_name=ENTERPRISE_GTM_POD_PROJECT_NAME,
+                phase_name=ENTERPRISE_GTM_POD_DEFAULT_PHASE_NAME,
             ),
             confidence=Confidence.HIGH,
             duration_minutes=duration,

@@ -136,20 +136,30 @@ SUPPORT_TICKETS_NAME = "Support Tickets (strategic)"
 # Value Engineering — matched by title, logged to Overhead > Enabling Work
 VALUE_ENGINEERING_PATTERN = re.compile(r"value\s+engineering", re.IGNORECASE)
 
-# Enterprise Account Pods — matched by title, logged to project 1000405 as billable investment
-# Covers: Enterprise Methodology Pod, Hockey Stick, POD 1, Commercial Pod 1
+# Enterprise Methodology Pod — "enterprise methodology/pod" events → project 1000405
 ENTERPRISE_POD_PATTERN = re.compile(
-    r"enterprise\s+(methodology|pod)"
-    r"|hockey\s*stick"
+    r"enterprise\s+(methodology|pod)",
+    re.IGNORECASE,
+)
+ENTERPRISE_POD_PROJECT_ID = 1000405
+ENTERPRISE_POD_PROJECT_NAME = "Enterprise Methodology Pod"
+ENTERPRISE_POD_DEFAULT_PHASE_NAME = "Enterprise Pod Work Q1 2026"
+
+# Enterprise GTM / Account PODs — POD 1, Hockey Stick, Commercial Pod → project 1100677
+ENTERPRISE_GTM_POD_PATTERN = re.compile(
+    r"hockey\s*stick"
     r"|\bpod\s*1\b"
     r"|\bpod\s+one\b"
     r"|commercial\s+pod"
     r"|\bcompod\b",
     re.IGNORECASE,
 )
-ENTERPRISE_POD_PROJECT_ID = 1000405
-ENTERPRISE_POD_PROJECT_NAME = "Enterprise Methodology Pod"
-ENTERPRISE_POD_DEFAULT_PHASE_NAME = "Enterprise Pod Work Q1 2026"
+ENTERPRISE_GTM_POD_PROJECT_ID = 1100677
+ENTERPRISE_GTM_POD_PROJECT_NAME = "Enterprise Account PODs"
+ENTERPRISE_GTM_POD_DEFAULT_PHASE_NAME = "Enterprise Pod Work Q1 2026"
+
+# Projects whose Rocketlane budget is non-billable — must be posted with billable=False
+NON_BILLABLE_ROCKETLANE_PROJECTS: set[int] = {ENTERPRISE_POD_PROJECT_ID, ENTERPRISE_GTM_POD_PROJECT_ID}
 
 # ---------------------------------------------------------------------------
 # Overhead project and phases
