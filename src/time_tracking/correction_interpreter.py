@@ -58,6 +58,34 @@ Rules:
 """
 
 
+def _resolve_project_ids(changes: list[dict]) -> None:
+    """Fill in missing project_id by fuzzy-matching project_name against the Rocketlane cache."""
+    cache_path = BASE_DIR / "cache" / "rocketlane_projects_phases.json"
+    if not cache_path.exists():
+        return
+
+    cache = json.loads(cache_path.read_text())
+
+    for change in changes:
+        if change.get("project_id") is not None or not change.get("project_name"):
+            continue
+
+        target = change["project_name"].lower()
+        best_id = None
+        best_name = None
+
+        for pid, project in cache.items():
+            name = project["name"] if isinstance(project, dict) else str(project)
+            if target in name.lower() or name.lower() in target:
+                best_id = int(pid)
+                best_name = name
+                break
+
+        if best_id:
+            change["project_id"] = best_id
+            change["project_name"] = best_name
+
+
 def _apply_changes(day: DayClassification, changes: list[dict]) -> DayClassification:
     """Apply structured changes to matching events via user_override."""
     for change in changes:
@@ -216,6 +244,7 @@ def interpret_and_apply(
     save_as_rule = result.get("save_as_rule", False)
     summary = result.get("summary", "Applied corrections")
 
+    _resolve_project_ids(changes)
     updated_day = _apply_changes(day, changes)
 
     if save_as_rule and "rule" in result:
