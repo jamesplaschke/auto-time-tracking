@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from .auto_update import auto_update
+
+auto_update()
+
 import argparse
 import json
 import sys
