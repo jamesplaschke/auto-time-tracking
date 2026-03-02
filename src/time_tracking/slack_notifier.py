@@ -2,9 +2,30 @@
 
 from __future__ import annotations
 
+import json
 from datetime import date
+from pathlib import Path
+
+from typing import TYPE_CHECKING
 
 from .models import BillableType, Confidence, DayClassification
+
+if TYPE_CHECKING:
+    from .users import UserConfig
+
+CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "cache"
+_PENDING_FILE = CACHE_DIR / "pending_messages.json"
+
+
+def _load_pending() -> dict:
+    if _PENDING_FILE.exists():
+        return json.loads(_PENDING_FILE.read_text())
+    return {}
+
+
+def _save_pending(data: dict) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    _PENDING_FILE.write_text(json.dumps(data, indent=2))
 
 
 def _fmt_minutes(minutes: int) -> str:
@@ -114,18 +135,45 @@ def build_blocks(day: DayClassification) -> list[dict]:
             summary += f" +{more} more"
         footer_parts.append(f"Skipped {len(skipped)} events: {summary}")
 
-    footer_parts.append(f"Review `output/{day.date}.json` then run:\n`post-my-time-for {day.date}`")
+    footer_parts.append(
+        f"Reply in this thread to correct classifications, or click the button to post."
+    )
 
     blocks.append({
         "type": "section",
         "text": {"type": "mrkdwn", "text": "\n\n".join(footer_parts)},
     })
 
+    # "Post to Rocketlane" button
+    blocks.append({
+        "type": "actions",
+        "elements": [{
+            "type": "button",
+            "text": {"type": "plain_text", "text": "Post to Rocketlane"},
+            "style": "primary",
+            "action_id": "post_to_rocketlane",
+            "value": day.date,
+        }],
+    })
+
     return blocks
 
 
-def send_day_summary(day: DayClassification, user_id: str, token: str) -> bool:
-    """Send a Slack DM with the day summary. Returns True on success."""
+def send_day_summary(
+    day: DayClassification,
+    user_id: str,
+    token: str,
+    user: UserConfig | None = None,
+) -> bool:
+    """Send a Slack DM with the day summary. Returns True on success.
+
+    Args:
+        day: The classified day to summarize.
+        user_id: Slack user ID to DM.
+        token: Slack bot token.
+        user: Optional UserConfig — when provided, stores user_config_id
+              in the pending cache so the listener can resolve the correct user.
+    """
     try:
         from slack_sdk import WebClient
         from slack_sdk.errors import SlackApiError
@@ -147,7 +195,21 @@ def send_day_summary(day: DayClassification, user_id: str, token: str) -> bool:
         )
 
         blocks = build_blocks(day)
-        client.chat_postMessage(channel=channel_id, blocks=blocks, text=fallback)
+        resp = client.chat_postMessage(channel=channel_id, blocks=blocks, text=fallback)
+
+        # Write to pending cache so the listener knows which date this thread belongs to
+        message_ts = resp["ts"]
+        pending = _load_pending()
+        entry = {
+            "date": day.date,
+            "channel_id": channel_id,
+            "user_id": user_id,
+        }
+        if user:
+            entry["user_config_id"] = user.user_id
+        pending[message_ts] = entry
+        _save_pending(pending)
+
         return True
     except SlackApiError as e:
         print(f"Warning: Slack notification failed: {e.response['error']}")

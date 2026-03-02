@@ -10,8 +10,6 @@ from dataclasses import dataclass, field
 # Constants
 # ---------------------------------------------------------------------------
 
-TIMEZONE = "America/New_York"
-USER_EMAIL = "jamesp@ketryx.com"
 KETRYX_DOMAIN = "ketryx.com"
 
 # Domains to ignore when classifying attendees (not real people)
@@ -230,8 +228,6 @@ SKIP_TITLE_PATTERNS: list[re.Pattern] = [
     re.compile(r"\bblock(ed)?\s+time\b", re.IGNORECASE),
     # "Hold:" prefix = calendar blocker, skip it so the real events behind it are used
     re.compile(r"^\s*hold\s*:", re.IGNORECASE),
-    # Personal / non-work activities
-    re.compile(r"\bwater\s+polo\b", re.IGNORECASE),
     # Recurring internal sessions not tracked
     re.compile(r"wiring\s+to\s+win", re.IGNORECASE),
 ]

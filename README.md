@@ -5,20 +5,18 @@ Automatically pulls your Google Calendar events, classifies them into billable c
 ## How it works
 
 1. **Pull** — fetches your calendar events for a given day, classifies each one by attendee domain and title patterns, and writes a JSON file for review
-2. **Review** — inspect the output JSON and add `user_override` to any events that need corrections
-3. **Post** — reads the reviewed JSON and posts time entries to Rocketlane with the correct project, phase, and category
+2. **Review** — inspect the Slack summary (or output JSON) and reply with corrections in plain English
+3. **Post** — click "Post to Rocketlane" in Slack, or run the CLI command
 
 ---
 
-## Setup
+## New User Setup
 
 ### Prerequisites
-- Python 3.10+
-- [uv](https://docs.astral.sh/uv/) (`brew install uv`)
-- Google Calendar API credentials (see below)
-- Rocketlane API key (see below)
+- macOS or Linux
+- [uv](https://docs.astral.sh/uv/) package manager (`brew install uv` on Mac)
 
-### Install
+### Step 1: Clone the repo
 
 ```bash
 git clone https://github.com/jamesplaschke/auto-time-tracking
@@ -26,102 +24,98 @@ cd auto-time-tracking
 uv sync
 ```
 
----
+### Step 2: Get shared credentials from James
 
-### 1. Google Calendar credentials
+Ask James (Slack DM or 1Password) for these four items:
 
-You need a `credentials.json` file from Google Cloud to allow this tool to read your calendar.
+| Item | What it is |
+|------|-----------|
+| `credentials.json` | Google Calendar OAuth app config — drop this file in the repo root (same folder as `pyproject.toml`) |
+| `SLACK_BOT_TOKEN` | Shared Slack bot token (`xoxb-...`) |
+| `SLACK_APP_TOKEN` | Shared Slack app token for Socket Mode (`xapp-...`) |
+| `ANTHROPIC_API_KEY` | Shared Claude API key for thread corrections (`sk-ant-...`) |
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com) and **create a new project** (or select an existing one)
-2. In the left sidebar, go to **APIs & Services → Library**
-3. Search for **Google Calendar API** and click **Enable**
-4. Go to **APIs & Services → OAuth consent screen**
-   - Choose **Internal** if your Google account is a Workspace account (recommended), or **External** if personal
-   - Fill in an app name (e.g. "Auto Time Tracking") and your email — the rest can be left blank
-   - Click **Save and Continue** through the remaining screens
-5. Go to **APIs & Services → Credentials**
-   - Click **+ Create Credentials → OAuth client ID**
-   - Application type: **Desktop app**
-   - Name it anything (e.g. "auto-time-tracking")
-   - Click **Create**
-6. Click the **download icon** next to your new credential to download the JSON file
-7. Rename it to `credentials.json` and place it in the **project root** (same folder as `pyproject.toml`)
+### Step 3: Generate your Rocketlane API key
 
-**First run:** A browser window will open asking you to authorize access to your Google Calendar. After approving, a `token.json` file is created automatically — you won't be prompted again unless the token expires.
+1. Log in to [Rocketlane](https://app.rocketlane.com)
+2. Go to **Settings → API**
+3. Copy your personal API key
 
-> `credentials.json` and `token.json` are listed in `.gitignore` and will never be committed.
-
----
-
-### 2. Rocketlane API key
-
-1. In Rocketlane, go to **Settings → API**
-2. Copy your API key
-3. In the project root, copy the example env file and paste in your key:
+### Step 4: Create your `.env` file
 
 ```bash
 cp .env.example .env
 ```
 
-Then edit `.env`:
+Edit `.env` and fill in your values:
 
-```
-ROCKETLANE_API_KEY=your-key-here
+```bash
+# Replace YOUR_NAME with your user ID (e.g., JAMES, KEVIN)
+ROCKETLANE_API_KEY_YOUR_NAME=rl-your-key-here
+
+# Paste the shared tokens James sent you
+SLACK_BOT_TOKEN=xoxb-...
+SLACK_APP_TOKEN=xapp-...
+ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-> `.env` is listed in `.gitignore` and will never be committed.
+> `.env` is gitignored and will never be committed.
+
+### Step 5: Authenticate Google Calendar
+
+Run this once — a browser window will open asking you to sign in with your Google account:
+
+```bash
+uv run pull-my-time-for --user yourname
+```
+
+After approving, your OAuth token is saved to `tokens/yourname.json` (gitignored) and you won't be prompted again.
+
+### You're done!
 
 ---
 
 ## Usage
 
-### In the terminal
-
-**Pull your calendar for a day:**
+### Pull (classify your calendar)
 
 ```bash
-uv run pull-my-time-for 2026-02-18
-uv run pull-my-time-for          # defaults to today
-uv run pull-my-time-for --week   # Mon–Fri of current week
+uv run pull-my-time-for                        # today, default user
+uv run pull-my-time-for 2026-03-02             # specific date
+uv run pull-my-time-for --week                 # Mon–Fri of current week
+uv run pull-my-time-for --user kevin           # specific user
+uv run pull-my-time-for --user all             # all registered users
+uv run pull-my-time-for --week --user kevin    # combine flags
 ```
 
-Output is written to `output/YYYY-MM-DD.json`. Review it and add `user_override` to any events that need corrections before posting.
+Output is written to `output/{user}/{date}.json`. A Slack DM is sent with the summary.
 
-**Post time entries to Rocketlane:**
+### Post (send to Rocketlane)
 
 ```bash
-uv run post-my-time-for 2026-02-18
-uv run post-my-time-for 2026-02-18 --dry-run   # preview without posting
-uv run post-my-time-for 2026-02-18 -y          # skip confirmation prompt
-uv run post-my-time-for --week -y              # post full week
+uv run post-my-time-for 2026-03-02                    # post a day
+uv run post-my-time-for 2026-03-02 --dry-run           # preview without posting
+uv run post-my-time-for 2026-03-02 -y                  # skip confirmation
+uv run post-my-time-for --week -y --user kevin          # post full week for kevin
 ```
 
 Duplicate detection prevents double-posting — safe to run multiple times.
 
----
+### Via Slack
 
-### In Claude Code or Cursor
+After pulling, you'll get a Slack DM with a summary table. From there:
+- **Reply in the thread** with corrections in plain English (e.g., "skip the standup" or "move the Philips meeting to Configuration phase")
+- **Click "Post to Rocketlane"** to post all entries
 
-You can use this tool conversationally inside Claude Code or Cursor by describing what you want in plain English. The AI reads the output JSON, applies overrides, and runs the commands for you.
+### In Claude Code
 
-**Example prompts:**
+Use the slash commands:
+- `/pull-timesheet [date] [--week] [--user USER]`
+- `/post-timesheet [date] [--week] [--dry-run] [--user USER]`
 
-> "Pull my time for today and show me what was classified."
-
-> "Post today's time to Rocketlane — skip the standup and mark the Philips session as Configuration."
-
-> "Pull and post the full week, skipping anything that's overhead."
-
-The tool works the same way under the hood — the AI just handles the pull → review → override → post loop for you instead of you editing JSON manually.
-
-**To enable this in Claude Code**, add the following to your project's `CLAUDE.md` or just describe your workflow once at the start of a session:
-
-```
-I use auto-time-tracking. The commands are:
-  uv run pull-my-time-for [date|--week]
-  uv run post-my-time-for [date|--week] [--dry-run] [-y]
-Output is in output/YYYY-MM-DD.json. I will describe any overrides I need and you apply them before posting.
-```
+Or just describe what you want in plain English:
+> "Pull my time for today and post it"
+> "Pull Kevin's time for the week"
 
 ---
 
@@ -132,7 +126,8 @@ Events are classified automatically using these rules (in priority order):
 | Rule | Result |
 |------|--------|
 | Declined / cancelled / all-day | Skip |
-| "Hold:" prefix, OOO, PTO, focus time, personal activities | Skip |
+| "Hold:" prefix, OOO, PTO, focus time | Skip |
+| Personal skip patterns (per-user) | Skip |
 | Title matches a support ticket pattern | Support Tickets project |
 | Title matches "enterprise methodology/pod" | Enterprise Methodology Pod |
 | Title matches "value engineering" | Overhead → Enabling Work |
@@ -140,7 +135,7 @@ Events are classified automatically using these rules (in priority order):
 | Title matches a known client name | That client's project |
 | Internal-only attendees | Overhead (phase matched by title) |
 | No attendees, title matches overhead pattern | Overhead |
-| Everything else | Low confidence — review in JSON |
+| Everything else | Low confidence — review in Slack or JSON |
 
 ### Billable vs investment
 
@@ -156,27 +151,28 @@ Phases are resolved automatically:
 
 ## Overriding a classification
 
-Edit the output JSON and add a `user_override` field to any event:
+Reply to the Slack DM thread with a correction in plain English:
+
+> "Skip the standup"
+> "Move the Philips session to Admin/Onboarding"
+> "Mark the Acme meeting as billable reportable"
+
+The AI interprets your instruction, updates the JSON, and auto-posts to Rocketlane.
+
+You can also edit the output JSON directly and add a `user_override` field:
 
 ```json
 {
-  "event": { "title": "Some Meeting" },
-  "confidence": "low",
-  "project_hints": [
-    { "project_id": 123456, "project_name": "Acme Corp - Implementation" }
-  ],
   "user_override": {
     "project_id": 123456,
     "phase_id": 789012,
     "billable": true,
-    "notes": "Custom note for time entry"
+    "notes": "Custom note"
   }
 }
 ```
 
-Set `"skip": true` in `user_override` to exclude an event from posting.
-
-For **unknown external attendees**, `project_hints` shows the top matching Rocketlane projects to make overrides easy.
+Set `"skip": true` in `user_override` to exclude an event.
 
 ---
 
@@ -191,10 +187,40 @@ ClientProject(
     domains=["acme.com"],
     default_phase_name="Implementation",
     phase_patterns=[
-        (re.compile(r"(prep|planning)", re.IGNORECASE), "Planning"),
-        (re.compile(r"support", re.IGNORECASE), "Support"),
+        (re.compile(r"(prep|planning)", re.IGNORECASE), "Planning"),
+        (re.compile(r"support", re.IGNORECASE), "Support"),
     ],
 ),
 ```
 
 Phase IDs are resolved automatically from the Rocketlane API — no need to look them up manually.
+
+---
+
+## Architecture
+
+```
+Google Calendar  →  pull-my-time-for (classify)
+                      → output/{user}/{date}.json
+                      → Slack DM with summary
+
+Slack thread     →  slack_listener (corrections via Claude)
+                      → update JSON + auto-post
+
+Slack button     →  slack_listener → post_time_entries
+                      → Rocketlane API
+
+CLI post         →  post-my-time-for
+                      → Rocketlane API
+```
+
+### Key files
+
+| File | Purpose |
+|------|---------|
+| `src/time_tracking/users.py` | User registry — add new users here |
+| `src/time_tracking/config.py` | Shared classification rules, client projects, patterns |
+| `src/time_tracking/classifier.py` | Rule-based classification engine |
+| `src/time_tracking/gcal_client.py` | Google Calendar API client |
+| `src/time_tracking/rocketlane_client.py` | Rocketlane API client |
+| `src/time_tracking/slack_listener.py` | Socket Mode daemon for Slack interactions |

@@ -2,8 +2,10 @@ output/
 cache/
 .env
 token.json
+tokens/
 credentials.json
 __pycache__/
 *.pyc
 .venv/
+corrections/
 .DS_Store

@@ -8,7 +8,7 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
-from .config import CATEGORY_INVESTMENT, CATEGORY_REPORTABLE
+from .config import CATEGORY_INVESTMENT, CATEGORY_REPORTABLE, NON_BILLABLE_ROCKETLANE_PROJECTS
 from .display import console, print_post_preview
 from .models import ClassifiedEvent, Confidence, DayClassification
 from .rocketlane_client import (
@@ -18,8 +18,7 @@ from .rocketlane_client import (
     get_phase_id,
     populate_overhead_phase_ids,
 )
-
-OUTPUT_DIR = Path(__file__).resolve().parent.parent.parent / "output"
+from .users import UserConfig, get_default_user, resolve_users
 
 
 def _get_week_dates(ref_date: date) -> list[date]:
@@ -28,12 +27,16 @@ def _get_week_dates(ref_date: date) -> list[date]:
     return [monday + timedelta(days=i) for i in range(5)]
 
 
-def _load_classified(date_str: str) -> DayClassification | None:
+def _load_classified(date_str: str, user: UserConfig | None = None) -> DayClassification | None:
     """Load classified events from JSON output file."""
-    path = OUTPUT_DIR / f"{date_str}.json"
+    if user:
+        path = user.output_dir / f"{date_str}.json"
+    else:
+        # Legacy fallback
+        path = Path(__file__).resolve().parent.parent.parent / "output" / f"{date_str}.json"
     if not path.exists():
         console.print(f"[red]No classified file found: {path}[/red]")
-        console.print("[dim]Run 'uv run classify --date {date_str}' first.[/dim]")
+        console.print(f"[dim]Run 'pull-my-time-for {date_str}' first.[/dim]")
         return None
     data = json.loads(path.read_text())
     return DayClassification.model_validate(data)
@@ -52,7 +55,7 @@ def _category_id_for(classified: ClassifiedEvent) -> int:
     return CATEGORY_INVESTMENT
 
 
-def _build_entries(day: DayClassification) -> list[dict]:
+def _build_entries(day: DayClassification, api_key: str | None = None) -> list[dict]:
     """Build list of time entry dicts from classified events."""
     entries = []
     low_conf_skipped = 0
@@ -73,9 +76,19 @@ def _build_entries(day: DayClassification) -> list[dict]:
             if "project_id" in override:
                 if classified.project:
                     classified.project.project_id = override["project_id"]
+                else:
+                    from .models import ProjectMapping
+                    classified.project = ProjectMapping(
+                        project_id=override["project_id"],
+                        project_name=override.get("project_name", ""),
+                        phase_id=override.get("phase_id"),
+                        phase_name=override.get("phase_name"),
+                    )
             if "phase_id" in override:
                 if classified.project:
                     classified.project.phase_id = override["phase_id"]
+            if "phase_name" in override and classified.project:
+                classified.project.phase_name = override["phase_name"]
             if "notes" in override:
                 classified.notes = override["notes"]
             if "category" in override:
@@ -108,11 +121,16 @@ def _build_entries(day: DayClassification) -> list[dict]:
         if not phase_id:
             phase_id = auto_phase_for_project(classified.project.project_id, classified.notes or "")
 
+        # Rocketlane rejects billable=True for projects with a non-billable budget
+        rocketlane_billable = classified.billable
+        if classified.project.project_id in NON_BILLABLE_ROCKETLANE_PROJECTS:
+            rocketlane_billable = False
+
         entry = {
             "date": day.date,
             "minutes": classified.duration_minutes,
             "notes": classified.notes,
-            "billable": classified.billable,
+            "billable": rocketlane_billable,
             "project_id": classified.project.project_id,
             "phase_id": phase_id,
             "project_name": classified.project.project_name,
@@ -130,7 +148,7 @@ def _build_entries(day: DayClassification) -> list[dict]:
     return entries
 
 
-def _post_entries(entries: list[dict], dry_run: bool = False) -> None:
+def _post_entries(entries: list[dict], dry_run: bool = False, api_key: str | None = None) -> None:
     """Post time entries to Rocketlane."""
     if not entries:
         console.print("[dim]Nothing to post.[/dim]")
@@ -154,6 +172,7 @@ def _post_entries(entries: list[dict], dry_run: bool = False) -> None:
                 project_id=entry.get("project_id"),
                 phase_id=entry.get("phase_id"),
                 category_id=entry.get("category_id"),
+                api_key=api_key,
             )
             entry_id = result.get("timeEntryId", "?")
             console.print(f"  [green]✓[/green] {entry['notes'][:40]} → ID {entry_id}")
@@ -166,20 +185,62 @@ def _post_entries(entries: list[dict], dry_run: bool = False) -> None:
     console.print(f"[bold]Done:[/bold] {success} posted, {failed} failed.")
 
 
-def process_date(date_str: str, dry_run: bool = False, yes: bool = False) -> None:
+def post_day(day: DayClassification, api_key: str | None = None) -> tuple[int, int]:
+    """Post a DayClassification to Rocketlane without any prompts or console output.
+
+    Returns (posted_count, skipped_count). Raises on hard errors.
+    Intended for programmatic use from slack_listener.py.
+    """
+    entries = _build_entries(day, api_key=api_key)
+    if not entries:
+        return 0, 0
+
+    entries = check_duplicates(day.date, entries, api_key=api_key)
+    if not entries:
+        return 0, 0
+
+    posted = 0
+    skipped = 0
+    for entry in entries:
+        try:
+            create_time_entry(
+                date_str=entry["date"],
+                minutes=entry["minutes"],
+                notes=entry["notes"],
+                billable=entry["billable"],
+                project_id=entry.get("project_id"),
+                phase_id=entry.get("phase_id"),
+                category_id=entry.get("category_id"),
+                api_key=api_key,
+            )
+            posted += 1
+        except Exception:
+            skipped += 1
+
+    return posted, skipped
+
+
+def process_date(
+    date_str: str,
+    dry_run: bool = False,
+    yes: bool = False,
+    user: UserConfig | None = None,
+) -> None:
     """Process a single date: load, build entries, confirm, post."""
-    day = _load_classified(date_str)
+    api_key = user.rocketlane_api_key if user else None
+
+    day = _load_classified(date_str, user=user)
     if not day:
         return
 
-    entries = _build_entries(day)
+    entries = _build_entries(day, api_key=api_key)
     if not entries:
         console.print(f"[dim]No entries to post for {date_str}.[/dim]")
         return
 
     # Check for duplicates (skip in dry-run to avoid unnecessary API calls)
     if not dry_run:
-        entries = check_duplicates(date_str, entries)
+        entries = check_duplicates(date_str, entries, api_key=api_key)
         if not entries:
             console.print(f"[dim]All entries already exist for {date_str}.[/dim]")
             return
@@ -197,13 +258,13 @@ def process_date(date_str: str, dry_run: bool = False, yes: bool = False) -> Non
             console.print("[dim]Cancelled.[/dim]")
             return
 
-    _post_entries(entries)
+    _post_entries(entries, api_key=api_key)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Post classified time entries to Rocketlane",
-        usage="post-my-time-for [date] [--week] [--dry-run] [-y]",
+        usage="post-my-time-for [date] [--week] [--dry-run] [-y] [--user USER]",
     )
     parser.add_argument(
         "date",
@@ -227,6 +288,11 @@ def main() -> None:
         action="store_true",
         help="Skip confirmation prompt.",
     )
+    parser.add_argument(
+        "--user",
+        default=None,
+        help="User to process (james/kevin/all). Defaults to james.",
+    )
     args = parser.parse_args()
 
     # Resolve overhead phase IDs from Rocketlane API
@@ -244,15 +310,21 @@ def main() -> None:
     else:
         dates = [date.today().isoformat()]
 
-    for date_str in dates:
-        if isinstance(date_str, date):
-            date_str = date_str.isoformat()
-        try:
-            process_date(date_str, dry_run=args.dry_run, yes=args.yes)
-        except Exception as e:
-            console.print(f"[red]Error processing {date_str}: {e}[/red]")
-            if len(dates) == 1:
-                sys.exit(1)
+    users = resolve_users(args.user)
+
+    for user in users:
+        if len(users) > 1:
+            console.print(f"\n[bold]Processing user: {user.user_id}[/bold]")
+
+        for date_str in dates:
+            if isinstance(date_str, date):
+                date_str = date_str.isoformat()
+            try:
+                process_date(date_str, dry_run=args.dry_run, yes=args.yes, user=user)
+            except Exception as e:
+                console.print(f"[red]Error processing {date_str} for {user.user_id}: {e}[/red]")
+                if len(dates) == 1 and len(users) == 1:
+                    sys.exit(1)
 
 
 if __name__ == "__main__":

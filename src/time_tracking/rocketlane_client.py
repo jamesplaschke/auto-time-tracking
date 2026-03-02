@@ -18,14 +18,18 @@ ROCKETLANE_API_BASE = "https://api.rocketlane.com/api/1.0"
 CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "cache"
 
 
-def _get_api_key() -> str:
-    api_key = os.environ.get("ROCKETLANE_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "ROCKETLANE_API_KEY environment variable is required. "
-            "Set it in .env or export it."
-        )
-    return api_key
+def _get_api_key(api_key: str | None = None) -> str:
+    if api_key:
+        return api_key
+    # Backward compat: try per-user env vars, then legacy name
+    for env_name in ("ROCKETLANE_API_KEY_JAMES", "ROCKETLANE_API_KEY"):
+        key = os.environ.get(env_name)
+        if key:
+            return key
+    raise ValueError(
+        "No Rocketlane API key found. Set ROCKETLANE_API_KEY_JAMES (or "
+        "ROCKETLANE_API_KEY) in .env or export it."
+    )
 
 
 def _request(
@@ -33,11 +37,16 @@ def _request(
     method: str = "GET",
     params: dict | None = None,
     json_body: dict | None = None,
+    api_key: str | None = None,
 ) -> dict:
-    """Make an authenticated request to the Rocketlane API."""
+    """Make an authenticated request to the Rocketlane API.
+
+    Args:
+        api_key: Explicit API key. When None, falls back to env vars.
+    """
     url = f"{ROCKETLANE_API_BASE}{endpoint}"
     headers = {
-        "api-key": _get_api_key(),
+        "api-key": _get_api_key(api_key),
         "accept": "application/json",
         "content-type": "application/json",
     }
@@ -111,11 +120,12 @@ def populate_overhead_phase_ids() -> None:
 # Time entry operations
 # ---------------------------------------------------------------------------
 
-def get_time_entries(date_str: str) -> list[dict]:
+def get_time_entries(date_str: str, api_key: str | None = None) -> list[dict]:
     """Get existing time entries for a specific date."""
     result = _request(
         "/time-entries",
         params={"date.eq": date_str, "pageSize": 100},
+        api_key=api_key,
     )
     return result.get("data", [])
 
@@ -128,6 +138,7 @@ def create_time_entry(
     project_id: int | None = None,
     phase_id: int | None = None,
     category_id: int | None = None,
+    api_key: str | None = None,
 ) -> dict:
     """Create a time entry in Rocketlane.
 
@@ -150,7 +161,7 @@ def create_time_entry(
     if category_id:
         body["category"] = {"categoryId": category_id}
 
-    return _request("/time-entries", method="POST", json_body=body)
+    return _request("/time-entries", method="POST", json_body=body, api_key=api_key)
 
 
 def get_all_projects() -> list[dict]:
@@ -289,13 +300,13 @@ def update_time_entry(
     return _request(f"/time-entries/{entry_id}", method="PUT", json_body=body)
 
 
-def check_duplicates(date_str: str, entries_to_post: list[dict]) -> list[dict]:
+def check_duplicates(date_str: str, entries_to_post: list[dict], api_key: str | None = None) -> list[dict]:
     """Check for existing entries and return only new ones.
 
     Matches by (minutes, project_id, phase_id, category_id) since the API
     does not return notes in time entry list responses.
     """
-    existing = get_time_entries(date_str)
+    existing = get_time_entries(date_str, api_key=api_key)
     existing_keys = {
         (
             e.get("minutes", 0),

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from google.auth.transport.requests import Request
@@ -13,16 +12,24 @@ SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 # Paths relative to the time-tracking project root
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-TOKEN_PATH = _PROJECT_ROOT / "token.json"
+_LEGACY_TOKEN_PATH = _PROJECT_ROOT / "token.json"
 CREDENTIALS_PATH = _PROJECT_ROOT / "credentials.json"
 
 
-def get_credentials() -> Credentials:
-    """Get valid Google OAuth2 credentials, refreshing or prompting as needed."""
+def get_credentials(token_path: Path | None = None) -> Credentials:
+    """Get valid Google OAuth2 credentials, refreshing or prompting as needed.
+
+    Args:
+        token_path: Where to store/load the OAuth token. Defaults to the
+                    legacy ``token.json`` in the project root.
+    """
+    if token_path is None:
+        token_path = _LEGACY_TOKEN_PATH
+
     creds = None
 
-    if TOKEN_PATH.exists():
-        creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), SCOPES)
+    if token_path.exists():
+        creds = Credentials.from_authorized_user_file(str(token_path), SCOPES)
 
     if creds and creds.valid:
         return creds
@@ -39,5 +46,7 @@ def get_credentials() -> Credentials:
         flow = InstalledAppFlow.from_client_secrets_file(str(CREDENTIALS_PATH), SCOPES)
         creds = flow.run_local_server(port=0)
 
-    TOKEN_PATH.write_text(creds.to_json())
+    # Ensure parent directory exists (e.g. tokens/)
+    token_path.parent.mkdir(parents=True, exist_ok=True)
+    token_path.write_text(creds.to_json())
     return creds
