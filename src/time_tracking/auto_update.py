@@ -2,14 +2,20 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
+import sys
 from pathlib import Path
 
 REPO_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 def auto_update() -> None:
-    """Pull latest changes and sync dependencies. Runs silently."""
+    """Pull latest changes, sync deps, and re-exec if code changed."""
+    # Guard against infinite re-exec loop
+    if os.environ.get("_AUTO_UPDATED"):
+        return
+
     try:
         result = subprocess.run(
             ["git", "pull", "--ff-only"],
@@ -29,5 +35,8 @@ def auto_update() -> None:
                 capture_output=True,
                 timeout=30,
             )
+            # Re-exec so the process loads the new code
+            os.environ["_AUTO_UPDATED"] = "1"
+            os.execvp(sys.argv[0], sys.argv)
     except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
         pass  # no git, no network, etc. — just skip
