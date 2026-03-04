@@ -25,6 +25,10 @@ from .config import (
     SUPPORT_TICKETS_NAME,
     SUPPORT_TICKETS_PROJECT_ID,
     VALUE_ENGINEERING_PATTERN,
+    VALUE_ENGINEERING_PHASE_ID,
+    VALUE_ENGINEERING_PHASE_NAME,
+    VALUE_ENGINEERING_PROJECT_ID,
+    VALUE_ENGINEERING_PROJECT_NAME,
     find_client_by_domain,
     find_client_by_title,
     get_domain,
@@ -202,21 +206,17 @@ def classify_event(
             notes=event.title,
         )
 
-    # Step 3: Check for value engineering (title-based, maps to Overhead > Enabling Work)
+    # Step 3: Check for value engineering (title-based, maps to Value Engineering project)
     if VALUE_ENGINEERING_PATTERN.search(event.title):
-        enabling_phase = next(
-            (p for p in OVERHEAD_PHASES if p.name == "Enabling Work"),
-            OVERHEAD_PHASES[-1],
-        )
         return ClassifiedEvent(
             event=event,
             billable=False,
-            category="overhead:enabling-work",
+            category="value-engineering",
             project=ProjectMapping(
-                project_id=OVERHEAD_PROJECT_ID,
-                project_name=OVERHEAD_PROJECT_NAME,
-                phase_id=enabling_phase.phase_id,
-                phase_name=enabling_phase.name,
+                project_id=VALUE_ENGINEERING_PROJECT_ID,
+                project_name=VALUE_ENGINEERING_PROJECT_NAME,
+                phase_id=VALUE_ENGINEERING_PHASE_ID,
+                phase_name=VALUE_ENGINEERING_PHASE_NAME,
             ),
             confidence=Confidence.HIGH,
             duration_minutes=duration,

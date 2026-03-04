@@ -131,8 +131,12 @@ CLIENT_PROJECTS: list[ClientProject] = [
 SUPPORT_TICKETS_PROJECT_ID = 1047192
 SUPPORT_TICKETS_NAME = "Support Tickets (strategic)"
 
-# Value Engineering — matched by title, logged to Overhead > Enabling Work
+# Value Engineering — matched by title, logged to Value Engineering project
 VALUE_ENGINEERING_PATTERN = re.compile(r"value\s+engineering", re.IGNORECASE)
+VALUE_ENGINEERING_PROJECT_ID = 1119785
+VALUE_ENGINEERING_PROJECT_NAME = "Value Engineering"
+VALUE_ENGINEERING_PHASE_ID = 4529082
+VALUE_ENGINEERING_PHASE_NAME = "ROI Calculator"
 
 # Enterprise Methodology Pod — "enterprise methodology/pod" events → project 1000405
 ENTERPRISE_POD_PATTERN = re.compile(
