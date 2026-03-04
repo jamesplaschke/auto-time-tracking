@@ -104,6 +104,10 @@ def process_date(target_date: date, user: UserConfig) -> DayClassification:
     from .correction_memory import apply_memories
     day = apply_memories(day, user.user_id)
 
+    # Recalculate stats after memories applied
+    tracked = [e for e in day.events if not e.skip]
+    day.low_confidence_count = sum(1 for e in tracked if e.confidence == Confidence.LOW)
+
     return day
 
 

@@ -43,10 +43,15 @@ def print_day_summary(day: DayClassification) -> None:
             if len(title) > 35:
                 title = title[:32] + "..."
 
+            # Show override project name if memory/correction applied
+            display_category = e.category
+            if e.user_override and e.user_override.get("project_name"):
+                display_category = f"[cyan]{e.user_override['project_name']}[/cyan]"
+
             table.add_row(
                 time_str,
                 title,
-                e.category,
+                display_category,
                 str(e.duration_minutes),
                 billable_str,
                 conf_str,
