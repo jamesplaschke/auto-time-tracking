@@ -19,7 +19,7 @@ from .gcal_client import fetch_events
 from .models import Confidence, DayClassification
 from .overlap import resolve_overlaps
 from .rocketlane_client import suggest_projects
-from .users import UserConfig, get_default_user, resolve_users
+from .users import UserConfig, resolve_users
 
 try:
     from zoneinfo import ZoneInfo
@@ -134,8 +134,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--user",
-        default=None,
-        help="User to process (james/kevin/all). Defaults to james.",
+        required=True,
+        help="User to process (e.g. james, kevin, lidor, all).",
     )
     args = parser.parse_args()
 

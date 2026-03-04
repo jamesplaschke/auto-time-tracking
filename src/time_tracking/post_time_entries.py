@@ -22,7 +22,7 @@ from .rocketlane_client import (
     get_phase_id,
     populate_overhead_phase_ids,
 )
-from .users import UserConfig, get_default_user, resolve_users
+from .users import UserConfig, resolve_users
 
 
 def _get_week_dates(ref_date: date) -> list[date]:
@@ -294,8 +294,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--user",
-        default=None,
-        help="User to process (james/kevin/all). Defaults to james.",
+        required=True,
+        help="User to process (e.g. james, kevin, lidor, all).",
     )
     args = parser.parse_args()
 

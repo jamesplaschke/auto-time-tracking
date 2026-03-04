@@ -21,14 +21,15 @@ CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "cache"
 def _get_api_key(api_key: str | None = None) -> str:
     if api_key:
         return api_key
-    # Backward compat: try per-user env vars, then legacy name
-    for env_name in ("ROCKETLANE_API_KEY_JAMES", "ROCKETLANE_API_KEY"):
-        key = os.environ.get(env_name)
-        if key:
-            return key
+    # Try any per-user key, then legacy fallback
+    for env_name, val in os.environ.items():
+        if env_name.startswith("ROCKETLANE_API_KEY_") and val:
+            return val
+    key = os.environ.get("ROCKETLANE_API_KEY")
+    if key:
+        return key
     raise ValueError(
-        "No Rocketlane API key found. Set ROCKETLANE_API_KEY_JAMES (or "
-        "ROCKETLANE_API_KEY) in .env or export it."
+        "No Rocketlane API key found. Set ROCKETLANE_API_KEY_<USER> in .env."
     )
 
 

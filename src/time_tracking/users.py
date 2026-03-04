@@ -207,9 +207,6 @@ USERS: dict[str, UserConfig] = {
     ),
 }
 
-DEFAULT_USER_ID = "james"
-
-
 def get_user(user_id: str) -> UserConfig:
     """Get a user by ID. Raises KeyError if not found."""
     if user_id not in USERS:
@@ -218,20 +215,18 @@ def get_user(user_id: str) -> UserConfig:
     return USERS[user_id]
 
 
-def get_default_user() -> UserConfig:
-    """Get the default user (James)."""
-    return USERS[DEFAULT_USER_ID]
-
-
 def resolve_users(cli_arg: str | None) -> list[UserConfig]:
     """Resolve --user CLI argument to a list of UserConfig objects.
 
-    None → default user only
+    None → error (--user is required)
     "all" → all registered users
     "james" / "kevin" → that specific user
     """
     if cli_arg is None:
-        return [get_default_user()]
+        available = ", ".join(USERS.keys())
+        raise SystemExit(
+            f"Error: --user is required. Available users: {available}"
+        )
     if cli_arg.lower() == "all":
         return list(USERS.values())
     return [get_user(cli_arg.lower())]
