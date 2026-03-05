@@ -1,0 +1,4160 @@
+{
+  "1000385": {
+    "name": "10XBETA Venture Studios (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969833,
+        "name": "Milestones"
+      },
+      {
+        "id": 3969836,
+        "name": "Task Management"
+      },
+      {
+        "id": 3969840,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1000386": {
+    "name": "AIgnostics (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969843,
+        "name": "Action Items from Meetings/Slack/Email"
+      },
+      {
+        "id": 3969847,
+        "name": "Internal Project Milestones"
+      },
+      {
+        "id": 3969851,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3969857,
+        "name": "High-touch support"
+      },
+      {
+        "id": 3969861,
+        "name": "Ketryx Anomolies & CRs"
+      },
+      {
+        "id": 3969864,
+        "name": "Milestones - Product 1: API Platform"
+      },
+      {
+        "id": 3969869,
+        "name": "Milestones - Product 2"
+      },
+      {
+        "id": 3969874,
+        "name": "Task Management"
+      }
+    ]
+  },
+  "1058510": {
+    "name": "ART Medical - New Deal",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4259566,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4259568,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4259569,
+        "name": "Planning"
+      },
+      {
+        "id": 4259578,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4259581,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4259582,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1103757": {
+    "name": "AZ - Digital Pathology Platform",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4465026,
+        "name": "Presales"
+      },
+      {
+        "id": 4465027,
+        "name": "Executive Engagement"
+      },
+      {
+        "id": 4465028,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4465029,
+        "name": "Discovery & Solutioning"
+      },
+      {
+        "id": 4465030,
+        "name": "Configuration"
+      },
+      {
+        "id": 4465031,
+        "name": "Templating"
+      },
+      {
+        "id": 4465032,
+        "name": "Operationalize & Go-Live"
+      },
+      {
+        "id": 4465033,
+        "name": "Transition to Enterprise Support & Success"
+      },
+      {
+        "id": 4465034,
+        "name": "DPP Presales"
+      },
+      {
+        "id": 4465035,
+        "name": "DPP Project Kickoff & Planning"
+      },
+      {
+        "id": 4465036,
+        "name": "DPP Internal Meetings"
+      },
+      {
+        "id": 4465037,
+        "name": "DPP Customer Meetings"
+      },
+      {
+        "id": 4465038,
+        "name": "DPP QMS Assessment"
+      },
+      {
+        "id": 4465039,
+        "name": "DPP Discovery"
+      },
+      {
+        "id": 4465040,
+        "name": "DPP Configuration"
+      },
+      {
+        "id": 4465041,
+        "name": "DPP QMS Implementation"
+      },
+      {
+        "id": 4465042,
+        "name": "DPP Templating"
+      },
+      {
+        "id": 4465043,
+        "name": "DPP Operationalize & Transition to CS"
+      }
+    ]
+  },
+  "1034013": {
+    "name": "Adrian - Internal",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4145418,
+        "name": "Personal Tasks"
+      }
+    ]
+  },
+  "1094131": {
+    "name": "Agilent - Atlassian Validation",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4418470,
+        "name": "Presales"
+      },
+      {
+        "id": 4418471,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4418473,
+        "name": "QMS Assessment"
+      },
+      {
+        "id": 4418474,
+        "name": "Discovery"
+      },
+      {
+        "id": 4418475,
+        "name": "Implementation in staging with demo data"
+      },
+      {
+        "id": 4418476,
+        "name": "Implementation in Client Sandbox with Snapshot data"
+      },
+      {
+        "id": 4418477,
+        "name": "Implementation in Client Production environment with production data"
+      },
+      {
+        "id": 4418478,
+        "name": "Operationalize"
+      },
+      {
+        "id": 4418479,
+        "name": "Go Live & Transition to CS"
+      },
+      {
+        "id": 4418480,
+        "name": "Adoption"
+      },
+      {
+        "id": 4418481,
+        "name": "Value Realization"
+      }
+    ]
+  },
+  "1094411": {
+    "name": "Agiliti - New Deal",
+    "status": "In Planning",
+    "phases": [
+      {
+        "id": 4420179,
+        "name": "Presales"
+      },
+      {
+        "id": 4420180,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4420181,
+        "name": "QMS Assessment"
+      },
+      {
+        "id": 4420182,
+        "name": "Discovery"
+      },
+      {
+        "id": 4420183,
+        "name": "Implementation in staging with demo data"
+      },
+      {
+        "id": 4420184,
+        "name": "Implementation in Client Sandbox with Snapshot data"
+      },
+      {
+        "id": 4420185,
+        "name": "Implementation in Client Production environment with production data"
+      },
+      {
+        "id": 4420186,
+        "name": "Operationalize"
+      },
+      {
+        "id": 4420188,
+        "name": "Go Live & Transition to CS"
+      },
+      {
+        "id": 4420189,
+        "name": "Adoption"
+      },
+      {
+        "id": 4420190,
+        "name": "Value Realization"
+      }
+    ]
+  },
+  "1000387": {
+    "name": "Alto Neuroscience (Internal) (Old, Asana)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969878,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969883,
+        "name": "General needs"
+      },
+      {
+        "id": 3969887,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969892,
+        "name": "Profesional Resourcing 2024"
+      },
+      {
+        "id": 3969896,
+        "name": "Profesional Resourcing 2025"
+      },
+      {
+        "id": 3969900,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969905,
+        "name": "Task Management"
+      },
+      {
+        "id": 3969910,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1003388": {
+    "name": "Alto | Ketryx Professional Services",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3985314,
+        "name": "Altolytics GxP Validation - Dashboards"
+      },
+      {
+        "id": 4245251,
+        "name": "Year 2"
+      }
+    ]
+  },
+  "1000388": {
+    "name": "Andromeda (Internal)",
+    "status": "Cancelled",
+    "phases": [
+      {
+        "id": 3969915,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969918,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969923,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969929,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969933,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1091467": {
+    "name": "Atlas Medical - New Deal",
+    "status": "In Planning",
+    "phases": [
+      {
+        "id": 4404978,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4404979,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4404980,
+        "name": "Planning"
+      },
+      {
+        "id": 4404981,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4404987,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4404988,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1000389": {
+    "name": "Beacon Biosignals (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969938,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969940,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969945,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969951,
+        "name": "Task Management"
+      },
+      {
+        "id": 3969954,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969959,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1022417": {
+    "name": "Business Case Presentation for LT",
+    "status": "In Planning (Internal)",
+    "phases": [
+      {
+        "id": 4100767,
+        "name": "1 week prior"
+      },
+      {
+        "id": 4100768,
+        "name": "2 weeks Prior or Earlier"
+      },
+      {
+        "id": 4100769,
+        "name": "Day Of Workshop"
+      },
+      {
+        "id": 4100773,
+        "name": "Logistics & On-Site Hospitality"
+      },
+      {
+        "id": 4100775,
+        "name": "Post-Workshop Follow-up & Documentation"
+      }
+    ]
+  },
+  "1004067": {
+    "name": "Canaray",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3988962,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3988963,
+        "name": "Implementation"
+      },
+      {
+        "id": 3988964,
+        "name": "Milestones"
+      },
+      {
+        "id": 3988965,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3988966,
+        "name": "Operating"
+      },
+      {
+        "id": 3988967,
+        "name": "Planning"
+      },
+      {
+        "id": 3988968,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000390": {
+    "name": "Click Therapeutics",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969971,
+        "name": "External Meetings Click 2025"
+      },
+      {
+        "id": 3969974,
+        "name": "Internal Meetings Click 2025"
+      },
+      {
+        "id": 3969980,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3969983,
+        "name": "Milestones"
+      },
+      {
+        "id": 3969988,
+        "name": "New Account Housekeeping"
+      },
+      {
+        "id": 4099519,
+        "name": "Project Management 2026"
+      },
+      {
+        "id": 4148617,
+        "name": "Internal Meetings Click 2026"
+      },
+      {
+        "id": 4148618,
+        "name": "External Meetings Click 2026"
+      },
+      {
+        "id": 4156957,
+        "name": "CT-155 mBrand (LER)"
+      },
+      {
+        "id": 4376377,
+        "name": "CT-152 (EU) Jira Migration Workstream"
+      },
+      {
+        "id": 4376394,
+        "name": "CT-152 (EU) Risk Management Workstream"
+      },
+      {
+        "id": 4376395,
+        "name": "CT-152 (EU) SBOM Workstream"
+      },
+      {
+        "id": 4376396,
+        "name": "CT-152 (EU) eQMS Workstream"
+      },
+      {
+        "id": 4376402,
+        "name": "CT-152 (EU) Templating Workstream"
+      }
+    ]
+  },
+  "1000391": {
+    "name": "Client Intelligence POD",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969998,
+        "name": "Deployment"
+      },
+      {
+        "id": 3970002,
+        "name": "Design"
+      },
+      {
+        "id": 3970007,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970012,
+        "name": "Testing"
+      },
+      {
+        "id": 4078137,
+        "name": "2026 activities"
+      }
+    ]
+  },
+  "1000393": {
+    "name": "Client Operations Leadership",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970017,
+        "name": "Agenda Topics and Tensions"
+      },
+      {
+        "id": 3970021,
+        "name": "Backlog"
+      },
+      {
+        "id": 3970026,
+        "name": "BAU"
+      },
+      {
+        "id": 3970031,
+        "name": "Done"
+      },
+      {
+        "id": 3970037,
+        "name": "In Progress"
+      },
+      {
+        "id": 3970042,
+        "name": "Parked"
+      }
+    ]
+  },
+  "1096200": {
+    "name": "Client Operations Onboarding - Gideon F",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4424580,
+        "name": "Days 1-2"
+      },
+      {
+        "id": 4424581,
+        "name": "Days 3-5 - configuration onboarding"
+      },
+      {
+        "id": 4424583,
+        "name": "Week 2"
+      },
+      {
+        "id": 4424584,
+        "name": "Weeks 3-4"
+      },
+      {
+        "id": 4424585,
+        "name": "Week 4-8 (30-60 days)"
+      },
+      {
+        "id": 4424586,
+        "name": "Week 9-12 (60-90 days)"
+      },
+      {
+        "id": 4424587,
+        "name": "Days 90+"
+      }
+    ]
+  },
+  "1058509": {
+    "name": "Curai Health",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4259571,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4259574,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4259577,
+        "name": "Planning"
+      },
+      {
+        "id": 4259580,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4259585,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4259586,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1035261": {
+    "name": "Cytovale",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4197987,
+        "name": "Meetings"
+      },
+      {
+        "id": 4295954,
+        "name": "Discovery"
+      },
+      {
+        "id": 4315165,
+        "name": "2026"
+      },
+      {
+        "id": 4485253,
+        "name": "Phase 1"
+      }
+    ]
+  },
+  "1000395": {
+    "name": "Deep Health Slack/Post-Deployment",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970057,
+        "name": "CN, CR, Anomaly, FAQ"
+      },
+      {
+        "id": 3970062,
+        "name": "Completed Items"
+      },
+      {
+        "id": 3970066,
+        "name": "General Tasks"
+      },
+      {
+        "id": 3970072,
+        "name": "Meeting Actions Items"
+      },
+      {
+        "id": 3970076,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970081,
+        "name": "Resourcing"
+      },
+      {
+        "id": 3970086,
+        "name": "Support / Slack"
+      },
+      {
+        "id": 3977414,
+        "name": "Slack Support '26"
+      },
+      {
+        "id": 4378548,
+        "name": "Zendesk Support Tickets"
+      },
+      {
+        "id": 4468240,
+        "name": "Slack Support Adjustment"
+      }
+    ]
+  },
+  "1014526": {
+    "name": "Deep Health Strategic",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4045501,
+        "name": "Strategic Planning '26"
+      }
+    ]
+  },
+  "1000396": {
+    "name": "DeepHealth Migrations/Releases",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970091,
+        "name": "DeepHealth service work"
+      },
+      {
+        "id": 3970094,
+        "name": "Releases"
+      },
+      {
+        "id": 3970100,
+        "name": "Migration/Service Work"
+      },
+      {
+        "id": 4147763,
+        "name": "2026 Migration Work"
+      },
+      {
+        "id": 4295690,
+        "name": "iCAD Migration"
+      },
+      {
+        "id": 4303497,
+        "name": "See-Mode Migration"
+      },
+      {
+        "id": 4465484,
+        "name": "Resourcing for Q1 Migrations"
+      }
+    ]
+  },
+  "1000398": {
+    "name": "Dexcom Deal: Stelo Nuvia",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3992543,
+        "name": "Mobile App:\nProject Kickoff & Planning"
+      },
+      {
+        "id": 3992550,
+        "name": "Mobile App: Discovery & Solution Design"
+      },
+      {
+        "id": 3992552,
+        "name": "Mobile App: Ketryx Platform Configuration"
+      },
+      {
+        "id": 3992554,
+        "name": "Mobile App: Templating 2025"
+      },
+      {
+        "id": 3992555,
+        "name": "Mobile App: Operationalize & Go-Live"
+      },
+      {
+        "id": 3992595,
+        "name": "Quality & Regulatory Advisory Services '25"
+      },
+      {
+        "id": 4003540,
+        "name": "Mobile App: DCCP Automation Q1 26"
+      },
+      {
+        "id": 4003641,
+        "name": "Mobile App: Frontend Design Chunking Solution "
+      },
+      {
+        "id": 4040571,
+        "name": "Mobile App: Hypercare for Incremental Approvals"
+      },
+      {
+        "id": 4040624,
+        "name": "Mobile App: Templating Q1 2026"
+      },
+      {
+        "id": 4146345,
+        "name": "Stelo Nuvia Back End Release Support"
+      },
+      {
+        "id": 4204125,
+        "name": "Mobile App Stelo Nuvia Front End 3.0 Release support"
+      },
+      {
+        "id": 4220780,
+        "name": "Dexcom Program Success - Product Enablement"
+      },
+      {
+        "id": 4259719,
+        "name": "Mobile App: User Training"
+      },
+      {
+        "id": 4345259,
+        "name": "Retreat Plan"
+      },
+      {
+        "id": 4357078,
+        "name": "Executive Engagement"
+      },
+      {
+        "id": 4378053,
+        "name": "Dexcom General Program Success"
+      },
+      {
+        "id": 4512178,
+        "name": "Stelo 3.1 Release Support"
+      }
+    ]
+  },
+  "1018219": {
+    "name": "Dexcom Strategic",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4141780,
+        "name": "Q1 2026 Strategic Activities"
+      },
+      {
+        "id": 4245034,
+        "name": "Release Schedules"
+      },
+      {
+        "id": 4370254,
+        "name": "Diagnose/Operational Buy-In"
+      },
+      {
+        "id": 4412041,
+        "name": "Propose/Propose POV"
+      },
+      {
+        "id": 4412117,
+        "name": "POV"
+      }
+    ]
+  },
+  "1000401": {
+    "name": "DigestAID",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970168,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970172,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970175,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970176,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970181,
+        "name": "Operating"
+      },
+      {
+        "id": 3970183,
+        "name": "Planning"
+      },
+      {
+        "id": 3970187,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000403": {
+    "name": "Eforto Health",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969834,
+        "name": "Planning"
+      },
+      {
+        "id": 3969837,
+        "name": "Support"
+      },
+      {
+        "id": 3970219,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970223,
+        "name": "High level plan + Milestones"
+      },
+      {
+        "id": 3970226,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970229,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3970232,
+        "name": "Operating"
+      },
+      {
+        "id": 4078294,
+        "name": "2026 resourcing placeholder"
+      }
+    ]
+  },
+  "1000404": {
+    "name": "Empyrean (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969842,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969845,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969849,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969852,
+        "name": "Task Management"
+      },
+      {
+        "id": 3969855,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969860,
+        "name": "Tracking of ANs/CRs"
+      }
+    ]
+  },
+  "1001246": {
+    "name": "Enovis",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3974767,
+        "name": "Implementation"
+      },
+      {
+        "id": 3974842,
+        "name": "Post Implementation"
+      }
+    ]
+  },
+  "1100677": {
+    "name": "Enterprise Account PODs",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4449796,
+        "name": "Enterprise Account POD"
+      }
+    ]
+  },
+  "1000405": {
+    "name": "Enterprise Methodology Pod",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969865,
+        "name": "Customer Needs"
+      },
+      {
+        "id": 3969868,
+        "name": "Done"
+      },
+      {
+        "id": 3969873,
+        "name": "Prioritized & Shaped"
+      },
+      {
+        "id": 4147127,
+        "name": "Archived"
+      },
+      {
+        "id": 4231950,
+        "name": "Enterprise Pod Work Q1 2026"
+      }
+    ]
+  },
+  "1000407": {
+    "name": "Evidation Health",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969882,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3969886,
+        "name": "Implementation"
+      },
+      {
+        "id": 3969890,
+        "name": "Milestones"
+      },
+      {
+        "id": 3969895,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3969899,
+        "name": "Operating"
+      },
+      {
+        "id": 3969904,
+        "name": "Planning"
+      },
+      {
+        "id": 3969908,
+        "name": "Rolling Task queue"
+      },
+      {
+        "id": 3969913,
+        "name": "Running action items"
+      },
+      {
+        "id": 3969920,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000409": {
+    "name": "FIGUR8",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969946,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3969950,
+        "name": "Implementation"
+      },
+      {
+        "id": 3969955,
+        "name": "Milestones"
+      },
+      {
+        "id": 3969960,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3969964,
+        "name": "Operating"
+      },
+      {
+        "id": 3969970,
+        "name": "Planning"
+      },
+      {
+        "id": 3969975,
+        "name": "Support"
+      },
+      {
+        "id": 3969978,
+        "name": "Tracking of Anomalies & CRs"
+      }
+    ]
+  },
+  "1000408": {
+    "name": "Faeth Therapeutics (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969924,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969927,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969931,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969936,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969941,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1000411": {
+    "name": "Flo Health",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969985,
+        "name": "CLIENT REQUESTS"
+      },
+      {
+        "id": 3969990,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3969992,
+        "name": "Implementation Milestones"
+      },
+      {
+        "id": 3969997,
+        "name": "Internal-Only Workstream for Future Engagements"
+      },
+      {
+        "id": 3970003,
+        "name": "Loose Action Items"
+      },
+      {
+        "id": 3970008,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 3970013,
+        "name": "New Team Members onboarding"
+      },
+      {
+        "id": 3970018,
+        "name": "Order Form Delivery Checklist"
+      },
+      {
+        "id": 3970022,
+        "name": "Planning"
+      },
+      {
+        "id": 3970028,
+        "name": "PRODUCT CHANGE REQUESTS & FEATURES"
+      },
+      {
+        "id": 3970033,
+        "name": "Work Week of July 7"
+      },
+      {
+        "id": 3970038,
+        "name": "Workstream 1: Implementation"
+      },
+      {
+        "id": 3970043,
+        "name": "Workstream 1: Operating"
+      },
+      {
+        "id": 3970046,
+        "name": "Workstream 1: Planning"
+      },
+      {
+        "id": 3970053,
+        "name": "Workstream 2: QMS Continuous Improvement (Optional Deliverables)"
+      },
+      {
+        "id": 3970058,
+        "name": "Workstream 2: QMS Transformation"
+      },
+      {
+        "id": 3984961,
+        "name": "Post-Implementation Support"
+      },
+      {
+        "id": 4078346,
+        "name": "Post-Implementation QA/RA Support"
+      }
+    ]
+  },
+  "1000412": {
+    "name": "Florence - Internal Only",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970063,
+        "name": "CR & AN"
+      },
+      {
+        "id": 3970067,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970071,
+        "name": "Resourcing"
+      },
+      {
+        "id": 3970077,
+        "name": "Task Management"
+      },
+      {
+        "id": 3970080,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1000413": {
+    "name": "Foresight Diagnostics",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970085,
+        "name": "AN & CR"
+      },
+      {
+        "id": 4148040,
+        "name": "High-touch support"
+      }
+    ]
+  },
+  "1000415": {
+    "name": "GEX (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970129,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970131,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3970134,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3970139,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3970140,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1034070": {
+    "name": "GeneDx Implementation",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4145706,
+        "name": "Project Planning"
+      },
+      {
+        "id": 4196840,
+        "name": "IVD QMS"
+      },
+      {
+        "id": 4206106,
+        "name": "End to End IEC 62304 Compliant Workflow Transformation"
+      },
+      {
+        "id": 4211927,
+        "name": "IVD Configuration MVP"
+      },
+      {
+        "id": 4218728,
+        "name": "Training and Go Live"
+      },
+      {
+        "id": 4218743,
+        "name": "Post Onboarding Customer Success"
+      },
+      {
+        "id": 4233526,
+        "name": "Investment time phase - Configuration MVP"
+      },
+      {
+        "id": 4258771,
+        "name": "Solution Architecture Consulting"
+      },
+      {
+        "id": 4478560,
+        "name": "Fully Operational Ketryx Platform IVD Design File"
+      }
+    ]
+  },
+  "1000417": {
+    "name": "Glucotrack (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970145,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970147,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970149,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970152,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970156,
+        "name": "New Account Housekeeping"
+      }
+    ]
+  },
+  "1004065": {
+    "name": "HOPPR",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3988969,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3988970,
+        "name": "Implementation"
+      },
+      {
+        "id": 3988971,
+        "name": "Internal Work"
+      },
+      {
+        "id": 3988972,
+        "name": "Milestones"
+      },
+      {
+        "id": 3988973,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3988974,
+        "name": "Operating"
+      },
+      {
+        "id": 3988975,
+        "name": "Planning"
+      },
+      {
+        "id": 3988976,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000420": {
+    "name": "HTD - Health",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970178,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970179,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970182,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970186,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970189,
+        "name": "Operating"
+      },
+      {
+        "id": 3970192,
+        "name": "Planning"
+      },
+      {
+        "id": 3970195,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000418": {
+    "name": "Heartflow",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970160,
+        "name": "CN, CR, AN & FAQ"
+      },
+      {
+        "id": 3970163,
+        "name": "Completed Tasks"
+      },
+      {
+        "id": 3970164,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970167,
+        "name": "Resourcing"
+      },
+      {
+        "id": 3970170,
+        "name": "Slack support / Meeting Action Items"
+      },
+      {
+        "id": 3970173,
+        "name": "Task Management"
+      }
+    ]
+  },
+  "1058511": {
+    "name": "Hippocratic AI",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4259570,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4259573,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4259575,
+        "name": "Planning"
+      },
+      {
+        "id": 4259579,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4259583,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4259584,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1002702": {
+    "name": "Hoppr",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3982394,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 3982395,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 3982396,
+        "name": "Planning"
+      },
+      {
+        "id": 3982397,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 3982399,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 3982400,
+        "name": "Go-live \ud83d\ude80"
+      }
+    ]
+  },
+  "1002899": {
+    "name": "Huxley",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3983438,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 3983439,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 3983440,
+        "name": "Planning"
+      },
+      {
+        "id": 3983441,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 3983445,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 3983446,
+        "name": "Go-live \ud83d\ude80"
+      }
+    ]
+  },
+  "1002980": {
+    "name": "IND",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3983918,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 3983919,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 3983920,
+        "name": "Planning"
+      },
+      {
+        "id": 3983921,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 3983922,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 3983923,
+        "name": "Go-live \ud83d\ude80"
+      }
+    ]
+  },
+  "1000422": {
+    "name": "Identifeye Health (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970205,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970207,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970211,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970213,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970217,
+        "name": "New Account Housekeeping"
+      }
+    ]
+  },
+  "1014475": {
+    "name": "Inogen Post-Implementation Account Management",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4045274,
+        "name": "2025 billable work"
+      },
+      {
+        "id": 4045306,
+        "name": "2025 (Yr 1) Post-Implementation / Customer Success"
+      },
+      {
+        "id": 4212814,
+        "name": "2026 (Yr 2) Post-Implementation / Customer Success"
+      },
+      {
+        "id": 4212891,
+        "name": "2025 (Yr 1) Regulatory Support"
+      },
+      {
+        "id": 4212996,
+        "name": "2026 (Yr 2) Regulatory Support"
+      },
+      {
+        "id": 4439217,
+        "name": "Zendesk Support Tickets"
+      }
+    ]
+  },
+  "1116583": {
+    "name": "Internal Tooling POD",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4513817,
+        "name": "Sprint 1"
+      },
+      {
+        "id": 4514699,
+        "name": "Sprint 2"
+      }
+    ]
+  },
+  "1000424": {
+    "name": "Iterative Health (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970220,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970222,
+        "name": "Resourcing"
+      },
+      {
+        "id": 3970225,
+        "name": "Task Management"
+      },
+      {
+        "id": 3970228,
+        "name": "TimeTracking"
+      }
+    ]
+  },
+  "1046766": {
+    "name": "J&J DPS Strategic",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4211430,
+        "name": "Q1 2026 Strategic Activities"
+      }
+    ]
+  },
+  "1000425": {
+    "name": "J&J Phase 2C",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969835,
+        "name": "CYRP Feature Updates"
+      },
+      {
+        "id": 3969838,
+        "name": "Safety Risk Process/Data Mapping"
+      },
+      {
+        "id": 3969841,
+        "name": "Threat Model"
+      },
+      {
+        "id": 3970231,
+        "name": "Aspen (Spine) Data CYRP"
+      }
+    ]
+  },
+  "1000426": {
+    "name": "J&J Phase 2C (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969844,
+        "name": "(Teams) Ketryx Issue Tracker Board"
+      },
+      {
+        "id": 3969848,
+        "name": "Admin"
+      },
+      {
+        "id": 3969853,
+        "name": "Bug Tracking"
+      },
+      {
+        "id": 3969856,
+        "name": "Document Templates"
+      },
+      {
+        "id": 3969859,
+        "name": "Internal CRs"
+      },
+      {
+        "id": 3969863,
+        "name": "Org/ Project Configuration"
+      },
+      {
+        "id": 3969867,
+        "name": "Polarion"
+      },
+      {
+        "id": 3969872,
+        "name": "Status Report"
+      },
+      {
+        "id": 3969876,
+        "name": "Threat Model"
+      },
+      {
+        "id": 3969881,
+        "name": "User Manual/ Guides"
+      },
+      {
+        "id": 3969885,
+        "name": "Vulnerability Management"
+      }
+    ]
+  },
+  "1000427": {
+    "name": "J&J Phase 3 (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969891,
+        "name": "Feedback from J&J"
+      },
+      {
+        "id": 3969897,
+        "name": "Migrations"
+      },
+      {
+        "id": 3969901,
+        "name": "Polarion Integration"
+      },
+      {
+        "id": 3969906,
+        "name": "Product Work"
+      },
+      {
+        "id": 3969909,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1018147": {
+    "name": "J&J Q1 2026",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4078317,
+        "name": "Threat Model Improvements"
+      },
+      {
+        "id": 4147978,
+        "name": "Q1 JnJ Project Management [Internal]"
+      },
+      {
+        "id": 4168874,
+        "name": "Meetings [Internal]"
+      },
+      {
+        "id": 4173303,
+        "name": "SBOM Quality Improvements and CI/CD Integration"
+      },
+      {
+        "id": 4174397,
+        "name": "CYRP Review Process Improvements"
+      },
+      {
+        "id": 4174414,
+        "name": "Operationalize Software/System Safety Risk Management"
+      },
+      {
+        "id": 4213003,
+        "name": "New Discovery"
+      },
+      {
+        "id": 4294328,
+        "name": "Regression Testing"
+      },
+      {
+        "id": 4357073,
+        "name": "Anomalies"
+      }
+    ]
+  },
+  "1000428": {
+    "name": "Jaspr - Internal",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969914,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969919,
+        "name": "Product Usage Metrics"
+      },
+      {
+        "id": 3969922,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969928,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969932,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1020628": {
+    "name": "Jolani Internal",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4198795,
+        "name": "Daily Task List"
+      },
+      {
+        "id": 4198796,
+        "name": "Weekly Planning"
+      },
+      {
+        "id": 4198799,
+        "name": "Monthly Planning"
+      },
+      {
+        "id": 4198801,
+        "name": "Quarterly OKRs"
+      },
+      {
+        "id": 4210785,
+        "name": "Done"
+      },
+      {
+        "id": 4210788,
+        "name": "Backlog"
+      }
+    ]
+  },
+  "1004499": {
+    "name": "Kevin B - Internal",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3991660,
+        "name": "Continuous Learning"
+      }
+    ]
+  },
+  "1000429": {
+    "name": "Kinomica (internal)",
+    "status": "Cancelled",
+    "phases": [
+      {
+        "id": 3969937,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969942,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969947,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969952,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969956,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1000430": {
+    "name": "Labviva",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969961,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3969965,
+        "name": "High level plan + Milestones"
+      },
+      {
+        "id": 3969969,
+        "name": "Implementation"
+      },
+      {
+        "id": 3969973,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3969979,
+        "name": "Operating"
+      },
+      {
+        "id": 3969984,
+        "name": "Planning"
+      },
+      {
+        "id": 3969989,
+        "name": "QMS"
+      },
+      {
+        "id": 3969994,
+        "name": "Support"
+      },
+      {
+        "id": 3969999,
+        "name": "Testing new agent architecture (A-B projects)"
+      }
+    ]
+  },
+  "1045980": {
+    "name": "Lee Internal",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4207823,
+        "name": "Personal Tasks"
+      }
+    ]
+  },
+  "1000431": {
+    "name": "Linus Health",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970004,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3970006,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3970016,
+        "name": "Time tracking (nonbillable)"
+      },
+      {
+        "id": 3986260,
+        "name": "Planning"
+      },
+      {
+        "id": 3986289,
+        "name": "Configuration"
+      },
+      {
+        "id": 3986294,
+        "name": "Migration"
+      },
+      {
+        "id": 4091647,
+        "name": "eQMS"
+      },
+      {
+        "id": 4091651,
+        "name": "SBOM"
+      }
+    ]
+  },
+  "1099020": {
+    "name": "Lumonus",
+    "status": "In Planning",
+    "phases": [
+      {
+        "id": 4440287,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4440288,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4440289,
+        "name": "Planning"
+      },
+      {
+        "id": 4440291,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4440294,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4440295,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1004064": {
+    "name": "MARS Bioimaging",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3988977,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3988978,
+        "name": "Implementation"
+      },
+      {
+        "id": 3988979,
+        "name": "Milestones"
+      },
+      {
+        "id": 3988980,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3988981,
+        "name": "Operating"
+      },
+      {
+        "id": 3988982,
+        "name": "Planning"
+      },
+      {
+        "id": 3988983,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000432": {
+    "name": "Med-Logix SRL (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970023,
+        "name": "CRs/ Anomalies"
+      },
+      {
+        "id": 3970027,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970032,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3970036,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3970041,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1088857": {
+    "name": "MedCognetics",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4396231,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4396233,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4396234,
+        "name": "Planning"
+      },
+      {
+        "id": 4396237,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4396242,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4396243,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1000433": {
+    "name": "Medigital (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970047,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970052,
+        "name": "Resourcing"
+      },
+      {
+        "id": 3970056,
+        "name": "Task Management"
+      },
+      {
+        "id": 3970061,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1017352": {
+    "name": "Medtronic - Project Stitch",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4046859,
+        "name": "Presales"
+      },
+      {
+        "id": 4046860,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4046863,
+        "name": "Discovery"
+      },
+      {
+        "id": 4046866,
+        "name": "Implementation in Client Sandbox with Snapshot data"
+      },
+      {
+        "id": 4046867,
+        "name": "Implementation in Client Production environment with production data"
+      },
+      {
+        "id": 4046868,
+        "name": "Operationalize"
+      },
+      {
+        "id": 4046869,
+        "name": "Go Live & Transition to CS"
+      },
+      {
+        "id": 4046870,
+        "name": "Adoption"
+      },
+      {
+        "id": 4046871,
+        "name": "Value Realization"
+      },
+      {
+        "id": 4423770,
+        "name": "Ketryx Validation"
+      },
+      {
+        "id": 4423788,
+        "name": "Documentation Generation"
+      },
+      {
+        "id": 4423834,
+        "name": "General Project Management"
+      },
+      {
+        "id": 4485711,
+        "name": "MVP General Implementation"
+      }
+    ]
+  },
+  "1000394": {
+    "name": "Meta RL: Comet SaMD - Phase 1",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970048,
+        "name": "OK2Pivotal"
+      },
+      {
+        "id": 3970051,
+        "name": "OK2Verification"
+      },
+      {
+        "id": 4151442,
+        "name": "OK2Verfication - Q1 2026"
+      }
+    ]
+  },
+  "1000402": {
+    "name": "Meta RL: Dolores SaMD phase 2",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970190,
+        "name": "Design output version"
+      },
+      {
+        "id": 3970193,
+        "name": "Migration"
+      },
+      {
+        "id": 3970196,
+        "name": "OK2Clinical"
+      },
+      {
+        "id": 3970198,
+        "name": "OK2Clinical - update"
+      },
+      {
+        "id": 3970202,
+        "name": "OK2Submit"
+      },
+      {
+        "id": 3970204,
+        "name": "OK2Summative"
+      },
+      {
+        "id": 3970208,
+        "name": "Planing"
+      },
+      {
+        "id": 3970210,
+        "name": "Post Submission"
+      },
+      {
+        "id": 3970214,
+        "name": "Presentation and Release"
+      },
+      {
+        "id": 3970216,
+        "name": "Verification deliverables version"
+      },
+      {
+        "id": 4151546,
+        "name": "OK2Launch"
+      }
+    ]
+  },
+  "1000414": {
+    "name": "Meta RL: General work",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970095,
+        "name": "AN"
+      },
+      {
+        "id": 3970099,
+        "name": "Bug Process"
+      },
+      {
+        "id": 3970104,
+        "name": "CN"
+      },
+      {
+        "id": 3970113,
+        "name": "CR"
+      },
+      {
+        "id": 3970120,
+        "name": "General"
+      },
+      {
+        "id": 3970125,
+        "name": "Update templates"
+      },
+      {
+        "id": 4151500,
+        "name": "G-Chat Support - 2026"
+      },
+      {
+        "id": 4370273,
+        "name": "Weekly Meetings"
+      }
+    ]
+  },
+  "1000446": {
+    "name": "Meta RL: QMS - Document control",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969907,
+        "name": "Continue working"
+      },
+      {
+        "id": 3969911,
+        "name": "First release"
+      },
+      {
+        "id": 3969912,
+        "name": "Planing"
+      },
+      {
+        "id": 3969916,
+        "name": "Second release"
+      },
+      {
+        "id": 3969917,
+        "name": "Set-up"
+      },
+      {
+        "id": 3969921,
+        "name": "Training module"
+      },
+      {
+        "id": 4151536,
+        "name": "Training Module -Q1 2026"
+      }
+    ]
+  },
+  "1000421": {
+    "name": "Meta RL: SmartGlasses HaMD - Phase 1",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970199,
+        "name": "General"
+      },
+      {
+        "id": 3970201,
+        "name": "Version 1.0"
+      },
+      {
+        "id": 4151529,
+        "name": "Version 1.0 - Q1 2025"
+      }
+    ]
+  },
+  "1000456": {
+    "name": "Meta RL: Tools validation",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970087,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1056004": {
+    "name": "Meta Robotics: Carbon+",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4303544,
+        "name": "Kickoff"
+      }
+    ]
+  },
+  "1000435": {
+    "name": "MoCA Cognition",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970065,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970070,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970075,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970079,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970084,
+        "name": "Operating"
+      },
+      {
+        "id": 3970088,
+        "name": "Planning"
+      },
+      {
+        "id": 3970093,
+        "name": "Support"
+      }
+    ]
+  },
+  "1017226": {
+    "name": "Moberg Analytics",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4046263,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4046266,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4046268,
+        "name": "Planning"
+      },
+      {
+        "id": 4046270,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4046273,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4046275,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1000436": {
+    "name": "Momentum health (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970098,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970103,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970109,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970114,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970118,
+        "name": "New Account Housekeeping"
+      }
+    ]
+  },
+  "1000437": {
+    "name": "My Mako",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970123,
+        "name": "Go Live Punch List"
+      },
+      {
+        "id": 3970126,
+        "name": "Phase 1: Familiarization and Training"
+      },
+      {
+        "id": 3970128,
+        "name": "Phase 1: Ketryx configuration - Traceability, Process configuration, Document Templating"
+      },
+      {
+        "id": 3970132,
+        "name": "Phase 1: Source System Integrations and Configuration"
+      },
+      {
+        "id": 3970138,
+        "name": "Phase 1: System Connections and Discovery"
+      },
+      {
+        "id": 4001913,
+        "name": "Supreme Placeholder"
+      },
+      {
+        "id": 4203520,
+        "name": "2026 Actions"
+      }
+    ]
+  },
+  "1055923": {
+    "name": "NVIDIA Pilot",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4244844,
+        "name": "Pilot Start Requirements"
+      },
+      {
+        "id": 4244850,
+        "name": "90-Day Evaluation"
+      },
+      {
+        "id": 4244873,
+        "name": "Pilot Environment Config"
+      }
+    ]
+  },
+  "1000438": {
+    "name": "NeckCare (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970148,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970150,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970153,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970155,
+        "name": "Ketryx Anomalies & CRs"
+      },
+      {
+        "id": 3970158,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970161,
+        "name": "New Account Housekeeping"
+      }
+    ]
+  },
+  "1083276": {
+    "name": "Neurotrack",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4370213,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4370214,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4370215,
+        "name": "Planning"
+      },
+      {
+        "id": 4370216,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4370217,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4370219,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1037098": {
+    "name": "Nutrino Post-Implementation Account Management",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4161990,
+        "name": "Ongoing Support "
+      }
+    ]
+  },
+  "1004063": {
+    "name": "Optain",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3988984,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3988985,
+        "name": "Implementation"
+      },
+      {
+        "id": 3988986,
+        "name": "Milestones"
+      },
+      {
+        "id": 3988987,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3988988,
+        "name": "Operating"
+      },
+      {
+        "id": 3988989,
+        "name": "Planning"
+      },
+      {
+        "id": 3988990,
+        "name": "Support"
+      },
+      {
+        "id": 3988991,
+        "name": "Tracking of CRs and Anomalies"
+      },
+      {
+        "id": 4151373,
+        "name": "January Migration"
+      }
+    ]
+  },
+  "1114498": {
+    "name": "Oracle Health - eDHF - Requirements & Test - Gen 2 P",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4501409,
+        "name": "Presales"
+      },
+      {
+        "id": 4501411,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4501413,
+        "name": "QMS Assessment"
+      },
+      {
+        "id": 4501416,
+        "name": "Discovery"
+      },
+      {
+        "id": 4501417,
+        "name": "Implementation in staging with demo data"
+      },
+      {
+        "id": 4501419,
+        "name": "Implementation in Client Sandbox with Snapshot data"
+      },
+      {
+        "id": 4501420,
+        "name": "Implementation in Client Production environment with production data"
+      },
+      {
+        "id": 4501422,
+        "name": "Operationalize"
+      },
+      {
+        "id": 4501423,
+        "name": "Go Live & Transition to CS"
+      },
+      {
+        "id": 4501424,
+        "name": "Adoption"
+      },
+      {
+        "id": 4501425,
+        "name": "Value Realization"
+      }
+    ]
+  },
+  "1000439": {
+    "name": "Oui Therapeutics (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970166,
+        "name": "Action Items"
+      },
+      {
+        "id": 3970169,
+        "name": "CR & AN"
+      },
+      {
+        "id": 3970171,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970174,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3970177,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3970180,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1000862": {
+    "name": "Overhead",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3977434,
+        "name": "Non-Project Meetings"
+      },
+      {
+        "id": 3977435,
+        "name": "Enabling Work"
+      },
+      {
+        "id": 3977436,
+        "name": "Other Overhead"
+      },
+      {
+        "id": 3977556,
+        "name": "QM Work"
+      },
+      {
+        "id": 4078371,
+        "name": "Resourcing placeholder"
+      },
+      {
+        "id": 4151534,
+        "name": "New Hire Onboarding - first 2 weeks"
+      },
+      {
+        "id": 4151537,
+        "name": "Onboarding"
+      },
+      {
+        "id": 4167927,
+        "name": "Performance Evaluations"
+      },
+      {
+        "id": 4167938,
+        "name": "Team 1:1s"
+      },
+      {
+        "id": 4167980,
+        "name": "POD Work"
+      },
+      {
+        "id": 4168045,
+        "name": "Hiring"
+      },
+      {
+        "id": 4233555,
+        "name": "Associate QM Support"
+      },
+      {
+        "id": 4483217,
+        "name": "PTO"
+      }
+    ]
+  },
+  "1000440": {
+    "name": "Owlet (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970184,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970185,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970188,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970191,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970194,
+        "name": "New Account Housekeeping"
+      },
+      {
+        "id": 4212449,
+        "name": "1/2026 Migration"
+      }
+    ]
+  },
+  "1000441": {
+    "name": "Oxos",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970197,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970200,
+        "name": "Implementation Tasks"
+      },
+      {
+        "id": 3970203,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3970206,
+        "name": "High-touch support"
+      },
+      {
+        "id": 3970209,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3970212,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1000442": {
+    "name": "Ozlo Sleep",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969839,
+        "name": "Support"
+      },
+      {
+        "id": 3970215,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970218,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970221,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970224,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970227,
+        "name": "Operating"
+      },
+      {
+        "id": 3970230,
+        "name": "Planning"
+      },
+      {
+        "id": 4082854,
+        "name": "Ad hoc support"
+      }
+    ]
+  },
+  "1000443": {
+    "name": "PathPresenter (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969846,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969850,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969854,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969858,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969862,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "994649": {
+    "name": "Philips - HPM (PICiX)",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3945180,
+        "name": "Admin/Onboarding"
+      },
+      {
+        "id": 3945198,
+        "name": "Configuration"
+      },
+      {
+        "id": 3945200,
+        "name": "Templating"
+      },
+      {
+        "id": 3945256,
+        "name": "Baseline Release"
+      },
+      {
+        "id": 4002721,
+        "name": "Dry run in Sandbox"
+      },
+      {
+        "id": 4002843,
+        "name": "Pre-kickoff"
+      },
+      {
+        "id": 4078200,
+        "name": "Resourcing placeholder"
+      },
+      {
+        "id": 4082900,
+        "name": "Post-implementation"
+      }
+    ]
+  },
+  "1000444": {
+    "name": "PictorLabs",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969866,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3969870,
+        "name": "Implementation"
+      },
+      {
+        "id": 3969871,
+        "name": "Milestones"
+      },
+      {
+        "id": 3969879,
+        "name": "Operating"
+      },
+      {
+        "id": 3969880,
+        "name": "Planning"
+      }
+    ]
+  },
+  "1046918": {
+    "name": "Pre-Sales Support",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4212391,
+        "name": "Deal Support '26"
+      }
+    ]
+  },
+  "1103253": {
+    "name": "Product x Client Request Tracker",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4462898,
+        "name": "Request Initiation"
+      },
+      {
+        "id": 4462900,
+        "name": "Request Review"
+      },
+      {
+        "id": 4462902,
+        "name": "Beta Partnerships"
+      },
+      {
+        "id": 4462904,
+        "name": "Product Councils"
+      },
+      {
+        "id": 4462905,
+        "name": "Other"
+      }
+    ]
+  },
+  "1004068": {
+    "name": "Prolaio",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3988992,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3988993,
+        "name": "Implementation"
+      },
+      {
+        "id": 3988994,
+        "name": "Milestones"
+      },
+      {
+        "id": 3988995,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3988996,
+        "name": "Operating"
+      },
+      {
+        "id": 3988997,
+        "name": "Planning"
+      },
+      {
+        "id": 3988998,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000445": {
+    "name": "PsyScale",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3969888,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3969889,
+        "name": "Implementation"
+      },
+      {
+        "id": 3969893,
+        "name": "Milestones"
+      },
+      {
+        "id": 3969894,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3969898,
+        "name": "Operating"
+      },
+      {
+        "id": 3969902,
+        "name": "Planning"
+      },
+      {
+        "id": 3969903,
+        "name": "Support"
+      },
+      {
+        "id": 3973357,
+        "name": "Project Management"
+      },
+      {
+        "id": 3973379,
+        "name": "Out of Office"
+      }
+    ]
+  },
+  "1069828": {
+    "name": "QA/RA - Internal",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4320852,
+        "name": "Slack/Email, Timesheets, Personal Tasks"
+      },
+      {
+        "id": 4320866,
+        "name": "Marketing - Blogs, Whitepapers, Thought Leadership"
+      },
+      {
+        "id": 4320867,
+        "name": "Webinar"
+      },
+      {
+        "id": 4320893,
+        "name": "Conferences and Ketryx Promotional Events"
+      },
+      {
+        "id": 4392861,
+        "name": "Product Team Support"
+      },
+      {
+        "id": 4464988,
+        "name": "Account Executives 1:1"
+      }
+    ]
+  },
+  "992170": {
+    "name": "QMS Templates",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 3984956,
+        "name": "Stage 1 - Initial Template Updates (Compliant for Clients)"
+      },
+      {
+        "id": 3984985,
+        "name": "Stage 2 - Traceability Matrices (Clops enablement and scaling)"
+      },
+      {
+        "id": 3985006,
+        "name": "Stage 3 - Regulatory expansion and eQMS (EU Revenue Expansion)"
+      }
+    ]
+  },
+  "1047506": {
+    "name": "Quadrivia",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4215589,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4215590,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4215592,
+        "name": "Planning"
+      },
+      {
+        "id": 4215593,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4215594,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4215595,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1002637": {
+    "name": "Quality",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3981981,
+        "name": "QMS"
+      },
+      {
+        "id": 4044895,
+        "name": "Backlog"
+      },
+      {
+        "id": 4044936,
+        "name": "Audits"
+      },
+      {
+        "id": 4045188,
+        "name": "V&V"
+      }
+    ]
+  },
+  "1088856": {
+    "name": "REDCap Cloud",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4396228,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4396230,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4396232,
+        "name": "Planning"
+      },
+      {
+        "id": 4396235,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4396240,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4396241,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1000447": {
+    "name": "Remedy Robotics (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969925,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3969926,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3969930,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3969934,
+        "name": "Task Management"
+      },
+      {
+        "id": 3969935,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3969939,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1003301": {
+    "name": "Revvity Priority Projects",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4042520,
+        "name": "NeoNGS LIMS"
+      },
+      {
+        "id": 4042534,
+        "name": "General NeoNGS Project Management"
+      },
+      {
+        "id": 4042545,
+        "name": "NeoNGS Support"
+      },
+      {
+        "id": 4042552,
+        "name": "NeoNGS Variant DB"
+      },
+      {
+        "id": 4042557,
+        "name": "Planning"
+      },
+      {
+        "id": 4308404,
+        "name": "EvoyaLab Support"
+      },
+      {
+        "id": 4485143,
+        "name": "NeoNGS Software Migration"
+      }
+    ]
+  },
+  "1003315": {
+    "name": "Revvity Steady State Projects",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3984929,
+        "name": "Template Project (Defaults)"
+      },
+      {
+        "id": 3984931,
+        "name": "Chemagic 4.0"
+      },
+      {
+        "id": 3984938,
+        "name": "Martys (IVD)"
+      },
+      {
+        "id": 3984947,
+        "name": "QCLive"
+      },
+      {
+        "id": 3984955,
+        "name": "Transcribe AI"
+      },
+      {
+        "id": 3984959,
+        "name": "Bodhi"
+      },
+      {
+        "id": 3984999,
+        "name": "General Ongoing Project Management"
+      },
+      {
+        "id": 4042449,
+        "name": "HL7"
+      },
+      {
+        "id": 4042574,
+        "name": "General Support"
+      },
+      {
+        "id": 4079055,
+        "name": "Validation Effort"
+      },
+      {
+        "id": 4368664,
+        "name": "Customer Needs"
+      }
+    ]
+  },
+  "1000449": {
+    "name": "Roche nCH Implementation",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970001,
+        "name": "Admin Setup & Onboarding"
+      },
+      {
+        "id": 3970005,
+        "name": "Configuration"
+      },
+      {
+        "id": 3970009,
+        "name": "General Useful links"
+      },
+      {
+        "id": 3970010,
+        "name": "Templating"
+      },
+      {
+        "id": 3970014,
+        "name": "Weekly Tasks"
+      },
+      {
+        "id": 4148093,
+        "name": "January '26"
+      },
+      {
+        "id": 4362586,
+        "name": "February '26"
+      },
+      {
+        "id": 4450133,
+        "name": "Critical Care"
+      },
+      {
+        "id": 4450139,
+        "name": "Hypercare"
+      },
+      {
+        "id": 4450163,
+        "name": "Post Implementation Support"
+      }
+    ]
+  },
+  "1001080": {
+    "name": "Roche nDP Phase 1",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3974209,
+        "name": "Presales"
+      },
+      {
+        "id": 3974210,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 3974211,
+        "name": "QMS Assessment"
+      },
+      {
+        "id": 3974213,
+        "name": "Discovery"
+      },
+      {
+        "id": 3974215,
+        "name": "Implementation in Client Sandbox with Snapshot data"
+      },
+      {
+        "id": 3974217,
+        "name": "Implementation in Client Production environment with production data"
+      },
+      {
+        "id": 3974218,
+        "name": "Operationalize"
+      },
+      {
+        "id": 3974219,
+        "name": "Go Live & Transition to CS"
+      },
+      {
+        "id": 3974221,
+        "name": "Adoption"
+      },
+      {
+        "id": 3974222,
+        "name": "Value Realization"
+      },
+      {
+        "id": 3981212,
+        "name": "Maturity Assessment"
+      },
+      {
+        "id": 3983661,
+        "name": "Phase 2 Parking Lot"
+      }
+    ]
+  },
+  "1047256": {
+    "name": "Rocketlane test",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4214531,
+        "name": "Presales"
+      },
+      {
+        "id": 4214533,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4214535,
+        "name": "QMS Assessment"
+      },
+      {
+        "id": 4214536,
+        "name": "Discovery"
+      },
+      {
+        "id": 4214538,
+        "name": "Implementation in staging with demo data"
+      },
+      {
+        "id": 4214540,
+        "name": "Implementation in Client Sandbox with Snapshot data"
+      },
+      {
+        "id": 4214541,
+        "name": "Implementation in Client Production environment with production data"
+      },
+      {
+        "id": 4214542,
+        "name": "Operationalize"
+      },
+      {
+        "id": 4214544,
+        "name": "Go Live & Transition to CS"
+      },
+      {
+        "id": 4214545,
+        "name": "Adoption"
+      },
+      {
+        "id": 4214547,
+        "name": "Value Realization"
+      }
+    ]
+  },
+  "1035211": {
+    "name": "SMB Investment",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4152032,
+        "name": "Resource Creation"
+      },
+      {
+        "id": 4152033,
+        "name": "High-touch support"
+      },
+      {
+        "id": 4152036,
+        "name": "Integration research"
+      },
+      {
+        "id": 4152291,
+        "name": "Customer Success/ Expansion"
+      },
+      {
+        "id": 4155010,
+        "name": "New feature config/ Product enablement"
+      }
+    ]
+  },
+  "1000451": {
+    "name": "SMB POD",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970039,
+        "name": "Onboarding resource needs"
+      },
+      {
+        "id": 3970040,
+        "name": "Sales Qualification [Laura]"
+      },
+      {
+        "id": 3970044,
+        "name": "ALM tooling [Joey]"
+      },
+      {
+        "id": 4404359,
+        "name": "eQMS [Mike/ Billy]"
+      },
+      {
+        "id": 4404363,
+        "name": "SBOM/ Threat Modeling [Mike]"
+      },
+      {
+        "id": 4404368,
+        "name": "Templating [Joey/ Charlie]"
+      },
+      {
+        "id": 4404369,
+        "name": "Customer Success/ Value delivery [Laura]"
+      }
+    ]
+  },
+  "1000450": {
+    "name": "Sequel",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970015,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970019,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970020,
+        "name": "Meeting Action Items"
+      },
+      {
+        "id": 3970024,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970025,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970029,
+        "name": "Operating"
+      },
+      {
+        "id": 3970030,
+        "name": "Planning"
+      },
+      {
+        "id": 3970034,
+        "name": "Support"
+      },
+      {
+        "id": 3970035,
+        "name": "Tracking of Anomalies & CRs"
+      },
+      {
+        "id": 4001987,
+        "name": "2026 Support"
+      }
+    ]
+  },
+  "1116762": {
+    "name": "SiPhox Health - New Deal",
+    "status": "To be Staffed",
+    "phases": [
+      {
+        "id": 4514976,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4514977,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4514978,
+        "name": "Planning"
+      },
+      {
+        "id": 4514979,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4514980,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4514981,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1035238": {
+    "name": "SideKick",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4152217,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4152219,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4152220,
+        "name": "Planning"
+      },
+      {
+        "id": 4152222,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4152224,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4152225,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  },
+  "1047011": {
+    "name": "Smith+Nephew - Sports Medicine",
+    "status": "In Planning (Internal)",
+    "phases": [
+      {
+        "id": 4484749,
+        "name": "Presales"
+      },
+      {
+        "id": 4484750,
+        "name": "Executive Engagement"
+      },
+      {
+        "id": 4484751,
+        "name": "Project Kickoff & Planning"
+      },
+      {
+        "id": 4484752,
+        "name": "Discovery & Solutioning"
+      },
+      {
+        "id": 4484753,
+        "name": "Configuration"
+      },
+      {
+        "id": 4484754,
+        "name": "Templating"
+      },
+      {
+        "id": 4484755,
+        "name": "Operationalize & Go-Live"
+      },
+      {
+        "id": 4484756,
+        "name": "Transition to Enterprise Support & Success"
+      },
+      {
+        "id": 4484845,
+        "name": "Jira Discovery and Pre-Requisites"
+      },
+      {
+        "id": 4484846,
+        "name": "Initial Jira Setup"
+      },
+      {
+        "id": 4484847,
+        "name": "Jira Issue Type & Field Mapping"
+      },
+      {
+        "id": 4484848,
+        "name": "Jira Approval Workflow & Status Configuration"
+      },
+      {
+        "id": 4484849,
+        "name": "Jira Traceability Configuration"
+      },
+      {
+        "id": 4484850,
+        "name": "Jira Risk Configuration"
+      }
+    ]
+  },
+  "1021612": {
+    "name": "Solutions Architecture POD",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4096358,
+        "name": "Backlog"
+      },
+      {
+        "id": 4096359,
+        "name": "To Do"
+      },
+      {
+        "id": 4096360,
+        "name": "In Progress"
+      },
+      {
+        "id": 4096361,
+        "name": "In Review"
+      },
+      {
+        "id": 4096537,
+        "name": "Complete"
+      },
+      {
+        "id": 4233596,
+        "name": "Solutions Pod Work Q1 2026"
+      },
+      {
+        "id": 4370944,
+        "name": "Brad Feb 26 Solutions Architecture Enablement"
+      }
+    ]
+  },
+  "1005660": {
+    "name": "Stryker Strategic",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3998896,
+        "name": "Jama Integration"
+      },
+      {
+        "id": 4002026,
+        "name": "Strategic Planning 2026"
+      }
+    ]
+  },
+  "1000453": {
+    "name": "Support Overhaul",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970045,
+        "name": "SMB Support Program Management"
+      },
+      {
+        "id": 3972583,
+        "name": "Support Tickets '26"
+      }
+    ]
+  },
+  "1047192": {
+    "name": "Support Tickets",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4214102,
+        "name": "Zendesk Support Tickets"
+      }
+    ]
+  },
+  "1004066": {
+    "name": "Surgical Theater",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3989004,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3989005,
+        "name": "Implementation"
+      },
+      {
+        "id": 3989006,
+        "name": "Milestones"
+      },
+      {
+        "id": 3989007,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3989008,
+        "name": "Operating"
+      },
+      {
+        "id": 3989009,
+        "name": "Planning"
+      },
+      {
+        "id": 3989010,
+        "name": "Support"
+      }
+    ]
+  },
+  "1002911": {
+    "name": "Tachmed",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3983495,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 3983496,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 3983497,
+        "name": "Planning"
+      },
+      {
+        "id": 3983498,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 3983501,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 3983503,
+        "name": "Go-live \ud83d\ude80"
+      },
+      {
+        "id": 4259151,
+        "name": "PLACEHOLDER - Director Hours"
+      }
+    ]
+  },
+  "1002958": {
+    "name": "Tactile",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3983797,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 3983798,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 3983799,
+        "name": "Planning"
+      },
+      {
+        "id": 3983802,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 3983804,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 3983805,
+        "name": "Go-live \ud83d\ude80"
+      },
+      {
+        "id": 4151352,
+        "name": "High-touch support"
+      }
+    ]
+  },
+  "1000454": {
+    "name": "Tandem Health (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970049,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970050,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970054,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970055,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970059,
+        "name": "Operating"
+      },
+      {
+        "id": 3970060,
+        "name": "Planning"
+      },
+      {
+        "id": 3970064,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000455": {
+    "name": "Telos Health (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970068,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970069,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970073,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970074,
+        "name": "Ketryx Anomalies & CRs"
+      },
+      {
+        "id": 3970078,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970082,
+        "name": "New Account Housekeeping"
+      },
+      {
+        "id": 3970083,
+        "name": "Support tickets"
+      }
+    ]
+  },
+  "1000457": {
+    "name": "TrueSilence (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970089,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970092,
+        "name": "MILESTONES"
+      },
+      {
+        "id": 3970096,
+        "name": "RESOURCING"
+      },
+      {
+        "id": 3970097,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3970101,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1000458": {
+    "name": "UpDoc AI (internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970102,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970106,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970107,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970111,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970112,
+        "name": "New Account Housekeeping"
+      }
+    ]
+  },
+  "1000459": {
+    "name": "Vektor Medical (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970116,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970117,
+        "name": "Resoucing"
+      },
+      {
+        "id": 3970121,
+        "name": "Task Management"
+      },
+      {
+        "id": 3970233,
+        "name": "Time Tracking"
+      },
+      {
+        "id": 3970234,
+        "name": "Untitled section"
+      }
+    ]
+  },
+  "1000460": {
+    "name": "Vero Biotech (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970235,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970236,
+        "name": "Resourcing"
+      },
+      {
+        "id": 3970237,
+        "name": "Task Management"
+      },
+      {
+        "id": 3970238,
+        "name": "Time Tracking"
+      }
+    ]
+  },
+  "1000461": {
+    "name": "Vista Robotics",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 3970239,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970240,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970241,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970242,
+        "name": "New project housekeeping"
+      },
+      {
+        "id": 3970243,
+        "name": "Operating"
+      },
+      {
+        "id": 3970244,
+        "name": "Planning"
+      },
+      {
+        "id": 3970245,
+        "name": "Support"
+      },
+      {
+        "id": 4078329,
+        "name": "Resourcing placeholder"
+      }
+    ]
+  },
+  "1000462": {
+    "name": "Vitrafy",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970246,
+        "name": "Continuous Improvement"
+      },
+      {
+        "id": 3970247,
+        "name": "Implementation"
+      },
+      {
+        "id": 3970248,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970249,
+        "name": "New Account housekeeping"
+      },
+      {
+        "id": 3970250,
+        "name": "Operating"
+      },
+      {
+        "id": 3970251,
+        "name": "Planning"
+      },
+      {
+        "id": 3970252,
+        "name": "Support"
+      }
+    ]
+  },
+  "1000463": {
+    "name": "Xion Medical (Internal)",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3970253,
+        "name": "EXTERNAL"
+      },
+      {
+        "id": 3970254,
+        "name": "Internal: Resourcing"
+      },
+      {
+        "id": 3970255,
+        "name": "Internal: Time Tracking"
+      },
+      {
+        "id": 3970256,
+        "name": "Milestones"
+      },
+      {
+        "id": 3970257,
+        "name": "New Account Housekeeping"
+      }
+    ]
+  },
+  "1000406": {
+    "name": "eRad (Viewer) migration",
+    "status": "Completed",
+    "phases": [
+      {
+        "id": 3969877,
+        "name": "HPV"
+      }
+    ]
+  },
+  "1000784": {
+    "name": "ki:elements Implementation",
+    "status": "In progress",
+    "phases": [
+      {
+        "id": 4000739,
+        "name": "Pre-Kick-off \u26bd\ufe0f"
+      },
+      {
+        "id": 4000741,
+        "name": "New Project Housekeeping"
+      },
+      {
+        "id": 4000743,
+        "name": "Planning"
+      },
+      {
+        "id": 4000747,
+        "name": "Implementation \ud83d\udccb"
+      },
+      {
+        "id": 4000751,
+        "name": "Operating \ud83e\uddd1\ud83c\udffb\u200d\ud83c\udfeb"
+      },
+      {
+        "id": 4000752,
+        "name": "Continuous Improvement \ud83d\ude80"
+      }
+    ]
+  }
+}
