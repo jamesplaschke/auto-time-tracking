@@ -1,5 +1,4 @@
 output/
-cache/
 .env
 token.json
 tokens/
@@ -9,3 +8,6 @@ __pycache__/
 .venv/
 corrections/
 .DS_Store
+cache/listener.log
+cache/listener.pid
+cache/pending_messages.json
