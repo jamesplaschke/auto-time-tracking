@@ -15,9 +15,11 @@ CORRECTIONS_DIR = BASE_DIR / "corrections"
 
 
 def load_memories(user_id: str) -> list[dict]:
-    """Load stored corrections for a user. Returns empty list if no file exists."""
+    """Load stored corrections for a user. Creates an empty file if none exists."""
     path = CORRECTIONS_DIR / f"{user_id}.json"
     if not path.exists():
+        CORRECTIONS_DIR.mkdir(parents=True, exist_ok=True)
+        path.write_text("[]")
         return []
     return json.loads(path.read_text())
 
