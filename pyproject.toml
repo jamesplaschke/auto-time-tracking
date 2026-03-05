@@ -18,6 +18,7 @@ dependencies = [
 pull-my-time-for = "time_tracking.classify_events:main"
 post-my-time-for = "time_tracking.post_time_entries:main"
 time-tracking-listener = "time_tracking.slack_listener:main"
+time-tracking-train = "time_tracking.train:main"
 
 [build-system]
 requires = ["hatchling"]

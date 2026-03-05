@@ -1,165 +1,87 @@
 # Setup Guide for Auto Time Tracking
 
-This walks you through getting the time tracking tool running on your Mac, step by step. No coding experience needed.
+No coding experience needed. You'll run one script and follow the prompts.
 
 ---
 
-## Step 1: Install the `uv` package manager
+## Step 1: Get two files from James
 
-Open **Terminal** (press Cmd+Space, type "Terminal", hit Enter) and paste this:
+James will send you over Slack or 1Password:
 
-```
-brew install uv
-```
+1. **`credentials.json`** — a file, save it anywhere for now (you'll be prompted where to put it)
+2. **`setup.sh`** — the setup script, save it to your **Downloads** folder
 
-If you don't have Homebrew installed, run this first:
-
+Also grab 3 keys James will send you:
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+SLACK_BOT_TOKEN=xoxb-...
+SLACK_APP_TOKEN=xapp-...
+ANTHROPIC_API_KEY=sk-ant-...
 ```
+Keep these handy — the script will ask for them.
 
 ---
 
-## Step 2: Download the code
-
-In Terminal, paste these three commands one at a time:
-
-```
-git clone https://github.com/jamesplaschke/auto-time-tracking.git
-```
-
-```
-cd auto-time-tracking
-```
-
-```
-uv sync
-```
-
-This downloads the project into a folder called `auto-time-tracking` on your computer (inside your home directory), then installs everything it needs.
-
----
-
-## Step 3: Add the files James sends you
-
-James will send you two things over Slack or 1Password:
-
-### 1. `credentials.json` (a file)
-
-Save this file into the `auto-time-tracking` folder. That's the top-level folder you just downloaded — the one that contains `pyproject.toml`, `README.md`, etc.
-
-To find it in Finder: open Finder, press Cmd+Shift+G, and paste:
-```
-~/auto-time-tracking
-```
-
-Drop `credentials.json` in there.
-
-### 2. A message with four secret keys
-
-James will send you something like:
-
-```
-SLACK_BOT_TOKEN=xoxb-1234-abcd...
-SLACK_APP_TOKEN=xapp-5678-efgh...
-ANTHROPIC_API_KEY=sk-ant-ijkl...
-```
-
-You'll use these in the next step.
-
----
-
-## Step 4: Create your `.env` file
-
-The `.env` file is a small text file that holds your secret keys (API passwords). The app reads this file when it runs. It stays on your computer and never gets uploaded.
-
-In Terminal, make sure you're in the project folder:
-
-```
-cd ~/auto-time-tracking
-```
-
-Then create the file by copying the template:
-
-```
-cp .env.example .env
-```
-
-Now open it in TextEdit:
-
-```
-open -a TextEdit .env
-```
-
-You'll see placeholder text. Replace it so it looks like this (using the real keys James sent you and your own Rocketlane key):
-
-```
-ROCKETLANE_API_KEY_KEVIN=rl-paste-your-rocketlane-key-here
-
-SLACK_BOT_TOKEN=xoxb-paste-the-real-token-here
-SLACK_APP_TOKEN=xapp-paste-the-real-token-here
-ANTHROPIC_API_KEY=sk-ant-paste-the-real-key-here
-```
-
-Delete any other lines you see (like the JAMES key or comment lines starting with `#`). Save and close.
-
-### Where to get your Rocketlane API key
+## Step 2: Get your Rocketlane API key
 
 1. Go to [app.rocketlane.com](https://app.rocketlane.com) and log in
 2. Click **Settings** (gear icon, bottom left)
 3. Click **API** in the sidebar
-4. Copy your API key
+4. Copy your API key — you'll need it in the next step
 
 ---
 
-## Step 5: Run it for the first time
+## Step 3: Run setup
 
-In Terminal:
+Open **Terminal** and paste:
 
 ```
-cd ~/auto-time-tracking
-uv run pull-my-time-for --user kevin
+bash ~/Downloads/setup.sh --user kevin
 ```
 
-A browser window will open asking you to sign into Google. **Use your kevinb@ketryx.com account.** Click through the permissions — this lets the tool read your calendar.
+Replace `kevin` with your user ID (ask James if unsure).
 
-After you approve, go back to Terminal. You should see your calendar events classified and a Slack DM with the summary.
+The script will:
+- Install everything it needs automatically
+- Ask you to drop `credentials.json` into the right folder
+- Ask for your 4 API keys (Rocketlane + the 3 from James) — input is hidden as you type
+- Open a browser window to connect your Google Calendar — sign in with your @ketryx.com account
+- Learn your patterns from the last 30 days of data
+- Run your first time pull and send you a Slack DM
+
+**That's it.** The whole thing takes about 5 minutes.
 
 ---
 
 ## Day-to-day usage
 
-Once setup is done, you just run this each day:
+Once setup is done, run this each day:
 
 ```
-cd ~/auto-time-tracking
-uv run pull-my-time-for --user kevin
+cd ~/auto-time-tracking && uv run pull-my-time-for --user kevin
 ```
 
 Or for a specific date:
-
 ```
 uv run pull-my-time-for 2026-03-02 --user kevin
 ```
 
 Or a full week (Monday to Friday):
-
 ```
 uv run pull-my-time-for --week --user kevin
 ```
 
-You'll get a Slack DM with the results. Reply in the thread if anything needs correcting, then click "Post to Rocketlane" when it looks right.
+You'll get a Slack DM with the results. Reply in the thread to make corrections, then click "Post to Rocketlane" when it looks right.
 
 ---
 
 ## Troubleshooting
 
-**"command not found: git"** — Install Xcode tools: `xcode-select --install`
+**"command not found: git"** — Run `xcode-select --install`, then re-run setup.sh.
 
-**"command not found: brew"** — Install Homebrew (see Step 1)
+**Google sign-in shows a warning** — Click "Advanced" → "Go to Auto Time Tracking (unsafe)". Normal for internal apps.
 
-**Google sign-in shows a warning** — Click "Advanced" → "Go to Auto Time Tracking (unsafe)". This is normal for internal apps.
+**"credentials.json still not found"** — Make sure you moved it to `~/auto-time-tracking/` (the script tells you the exact path).
 
-**"No such file or directory: .env"** — Make sure you're in the right folder: `cd ~/auto-time-tracking`
+**Made a mistake entering an API key** — Delete the `.env` file in `~/auto-time-tracking/` and re-run `bash ~/Downloads/setup.sh --user kevin`.
 
 Still stuck? Message James on Slack.
