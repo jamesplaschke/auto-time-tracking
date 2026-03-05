@@ -3,8 +3,7 @@
 from __future__ import annotations
 
 import os
-import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -19,7 +18,6 @@ class UserConfig:
     timezone: str
     slack_user_id: str
     rocketlane_api_key_env: str  # env var name, e.g. "ROCKETLANE_API_KEY_JAMES"
-    personal_skip_patterns: list[re.Pattern] = field(default_factory=list)
 
     @property
     def google_token_path(self) -> Path:
@@ -82,9 +80,6 @@ USERS: dict[str, UserConfig] = {
         timezone="America/New_York",
         slack_user_id="U09QB926YRK",
         rocketlane_api_key_env="ROCKETLANE_API_KEY_JAMES",
-        personal_skip_patterns=[
-            re.compile(r"\bwater\s+polo\b", re.IGNORECASE),
-        ],
     ),
     "jenn": UserConfig(
         user_id="jenn",

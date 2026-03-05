@@ -67,7 +67,7 @@ def process_date(target_date: date, user: UserConfig) -> DayClassification:
     events = fetch_events(target_date, user=user)
     console.print(f"[dim]Found {len(events)} events.[/dim]")
 
-    classified = classify_events(events, personal_skip_patterns=user.personal_skip_patterns or None)
+    classified = classify_events(events)
     classified = resolve_overlaps(classified)
 
     # Attach project hints to unknown-external events

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import math
-import re
 
 from .config import (
     ENTERPRISE_GTM_POD_DEFAULT_PHASE_NAME,
@@ -65,17 +64,8 @@ def _calc_duration_minutes(event: CalendarEvent) -> float:
     return delta.total_seconds() / 60
 
 
-def _should_skip(
-    event: CalendarEvent,
-    extra_skip_patterns: list[re.Pattern] | None = None,
-) -> str | None:
-    """Check if event should be skipped entirely. Returns reason or None.
-
-    Args:
-        event: The calendar event to check.
-        extra_skip_patterns: Additional per-user skip patterns to check
-                             after the shared ones.
-    """
+def _should_skip(event: CalendarEvent) -> str | None:
+    """Check if event should be skipped entirely. Returns reason or None."""
     # Cancelled
     if event.status == "cancelled":
         return "cancelled"
@@ -92,12 +82,6 @@ def _should_skip(
     for pattern in SKIP_TITLE_PATTERNS:
         if pattern.search(event.title):
             return f"title match: {pattern.pattern}"
-
-    # Personal skip patterns (per-user)
-    if extra_skip_patterns:
-        for pattern in extra_skip_patterns:
-            if pattern.search(event.title):
-                return f"title match: {pattern.pattern}"
 
     # Zero or negative duration
     if _calc_duration_minutes(event) <= 0:
@@ -129,21 +113,13 @@ def _extract_domains(event: CalendarEvent) -> tuple[set[str], set[str]]:
     return client_domains, internal_domains
 
 
-def classify_event(
-    event: CalendarEvent,
-    personal_skip_patterns: list[re.Pattern] | None = None,
-) -> ClassifiedEvent:
-    """Classify a single calendar event using the decision tree.
-
-    Args:
-        event: The calendar event to classify.
-        personal_skip_patterns: Additional per-user skip patterns.
-    """
+def classify_event(event: CalendarEvent) -> ClassifiedEvent:
+    """Classify a single calendar event using the decision tree."""
     raw_minutes = _calc_duration_minutes(event)
     duration = round_duration(raw_minutes)
 
     # Step 1: Skip check
-    skip_reason = _should_skip(event, extra_skip_patterns=personal_skip_patterns)
+    skip_reason = _should_skip(event)
     if skip_reason:
         return ClassifiedEvent(
             event=event,
@@ -337,14 +313,6 @@ def classify_event(
     )
 
 
-def classify_events(
-    events: list[CalendarEvent],
-    personal_skip_patterns: list[re.Pattern] | None = None,
-) -> list[ClassifiedEvent]:
-    """Classify a list of calendar events.
-
-    Args:
-        events: The calendar events to classify.
-        personal_skip_patterns: Additional per-user skip patterns.
-    """
-    return [classify_event(e, personal_skip_patterns=personal_skip_patterns) for e in events]
+def classify_events(events: list[CalendarEvent]) -> list[ClassifiedEvent]:
+    """Classify a list of calendar events."""
+    return [classify_event(e) for e in events]
