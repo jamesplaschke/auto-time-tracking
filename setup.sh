@@ -44,12 +44,18 @@ if ! command -v git &> /dev/null; then
     exit 1
 fi
 
-# ── Step 2: Install uv ───────────────────────────────────────────────────────
-export PATH="$HOME/.local/bin:$PATH"
+# ── Step 2: Install Homebrew + uv ────────────────────────────────────────────
+if ! command -v brew &> /dev/null; then
+    echo "=== Installing Homebrew ==="
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Add brew to PATH for Apple Silicon Macs
+    export PATH="/opt/homebrew/bin:$PATH"
+    echo ""
+fi
+
 if ! command -v uv &> /dev/null; then
     echo "=== Installing uv ==="
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    export PATH="$HOME/.local/bin:$PATH"
+    brew install uv
     echo ""
 fi
 
