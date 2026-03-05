@@ -37,6 +37,9 @@ echo ""
 echo "Setting up auto-time-tracking for: $USER_ID"
 echo ""
 
+# Ensure Homebrew is on PATH regardless of shell profile state (Intel + Apple Silicon)
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 # ── Step 1: Check git ────────────────────────────────────────────────────────
 if ! command -v git &> /dev/null; then
     echo "Git is not installed. Run this first, then re-run setup.sh:"
