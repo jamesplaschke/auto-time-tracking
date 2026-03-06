@@ -56,12 +56,13 @@ def _build_table(day: DayClassification) -> str:
 
     # Column widths
     W_TITLE = 26
-    W_PROJECT = 22
+    W_PROJECT = 20
+    W_PHASE = 18
     W_TYPE = 13   # "non-billable" is 12 chars
     W_DUR = 6
 
     header = (
-        f"{'Event':<{W_TITLE}}  {'Project':<{W_PROJECT}}  {'Type':<{W_TYPE}}  {'Time':>{W_DUR}}"
+        f"{'Event':<{W_TITLE}}  {'Project':<{W_PROJECT}}  {'Phase':<{W_PHASE}}  {'Type':<{W_TYPE}}  {'Time':>{W_DUR}}"
     )
     sep = "-" * len(header)
 
@@ -70,18 +71,20 @@ def _build_table(day: DayClassification) -> str:
         title = _truncate(e.event.title, W_TITLE)
         if e.project:
             proj = _truncate(e.project.project_name, W_PROJECT)
+            phase = _truncate(e.project.phase_name or "—", W_PHASE)
         else:
             proj = _truncate(e.category or "unclassified", W_PROJECT)
+            phase = "—"
         label = _billable_label(e)
         dur = _fmt_minutes(e.duration_minutes)
         rows.append(
-            f"{title:<{W_TITLE}}  {proj:<{W_PROJECT}}  {label:<{W_TYPE}}  {dur:>{W_DUR}}"
+            f"{title:<{W_TITLE}}  {proj:<{W_PROJECT}}  {phase:<{W_PHASE}}  {label:<{W_TYPE}}  {dur:>{W_DUR}}"
         )
 
     rows.append(sep)
     total_dur = _fmt_minutes(day.total_tracked_minutes)
     billable_dur = _fmt_minutes(day.total_billable_minutes)
-    summary = f"{'Total: ' + total_dur:<{W_TITLE + W_PROJECT + W_TYPE + 4}}  {'Bill: ' + billable_dur:>{W_DUR}}"
+    summary = f"{'Total: ' + total_dur:<{W_TITLE + W_PROJECT + W_PHASE + W_TYPE + 6}}  {'Bill: ' + billable_dur:>{W_DUR}}"
     rows.append(summary)
 
     return "\n".join(rows)

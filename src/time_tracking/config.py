@@ -178,7 +178,8 @@ ENTERPRISE_GTM_POD_PATTERN = re.compile(
     r"|\bpod\s*1\b"
     r"|\bpod\s+one\b"
     r"|commercial\s+pod"
-    r"|\bcompod\b",
+    r"|\bcompod\b"
+    r"|los\s+chingones",
     re.IGNORECASE,
 )
 ENTERPRISE_GTM_POD_PROJECT_ID = 1100677
