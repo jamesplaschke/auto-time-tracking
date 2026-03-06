@@ -283,9 +283,13 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
             notes=event.title,
         )
 
-    # Step 6: Internal-only event — match to overhead phase by title
+    # Step 6: Internal-only event — match to overhead phase by title.
+    # Default to Non-Project Meetings for any meeting with attendees that
+    # doesn't match a specific phase pattern (not Other Overhead).
     if internal_domains or event.attendees:
         phase = match_overhead_phase(event.title)
+        if not phase.title_patterns:  # catch-all returned — use Non-Project Meetings
+            phase = next(p for p in OVERHEAD_PHASES if p.name == "Non-Project Meetings")
         return ClassifiedEvent(
             event=event,
             billable=False,

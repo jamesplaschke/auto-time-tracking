@@ -127,6 +127,17 @@ CLIENT_PROJECTS: list[ClientProject] = [
         project_id=1014475,
         domains=["inogen.com"],
     ),
+    ClientProject(
+        name="Medtronic ACM",
+        project_id=1121886,
+        domains=["medtronic.com"],
+        title_patterns=[
+            re.compile(r"\bmedtronic\b", re.IGNORECASE),
+        ],
+        disambiguate={
+            "stitch": (1017352, "Medtronic - Project Stitch"),
+        },
+    ),
 ]
 
 # Support Tickets — matched by title, not domain
@@ -236,6 +247,7 @@ SKIP_TITLE_PATTERNS: list[re.Pattern] = [
     re.compile(r"^\s*hold\s*:", re.IGNORECASE),
     # Recurring internal sessions not tracked
     re.compile(r"wiring\s+to\s+win", re.IGNORECASE),
+    re.compile(r"\bwater\s+polo\b", re.IGNORECASE),
 ]
 
 # Events with these titles are investment (not reportable) for client projects
