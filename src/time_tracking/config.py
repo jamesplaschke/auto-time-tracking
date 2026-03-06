@@ -290,6 +290,125 @@ SUPPORT_TICKET_PATTERNS: list[re.Pattern] = [
 
 
 # ---------------------------------------------------------------------------
+# HubSpot domain → Rocketlane project mapping
+# ---------------------------------------------------------------------------
+# Source: HubSpot Closed-Won deals export, March 2026 (117 unique domains).
+# Maps every known customer email domain to its active Rocketlane project ID.
+# Used by find_client_by_domain() as a fallback after CLIENT_PROJECTS.domains.
+# Domains with no active Rocketlane project are omitted (Completed deals, etc.).
+
+HUBSPOT_DOMAIN_MAP: dict[str, int] = {
+    # ── Roche ──────────────────────────────────────────────────────────
+    "roche.com":                1000449,
+    "gene.com":                 1000449,
+    # ── Dexcom ─────────────────────────────────────────────────────────
+    "dexcom.com":               1000398,
+    # ── Medtronic ──────────────────────────────────────────────────────
+    "medtronic.com":            1121886,
+    # ── Philips ────────────────────────────────────────────────────────
+    "philips.com":              994649,
+    # ── J&J ────────────────────────────────────────────────────────────
+    "its.jnj.com":              1018147,
+    "jnj.com":                  1018147,
+    # ── Meta ───────────────────────────────────────────────────────────
+    "meta.com":                 1000414,
+    "fb.com":                   1000414,
+    "facebook.com":             1000414,
+    # ── Inogen ─────────────────────────────────────────────────────────
+    "inogen.net":               1014475,
+    # ── Flo Health ─────────────────────────────────────────────────────
+    "flo.health":               1000411,
+    # ── Click Therapeutics ─────────────────────────────────────────────
+    "clicktherapeutics.com":    1000390,
+    # ── Deep Health ────────────────────────────────────────────────────
+    "deephealth.com":           1000395,
+    "deep.health":              1014526,
+    # ── DigestAID ──────────────────────────────────────────────────────
+    "digestaid.health":         1000401,
+    # ── Heartflow ──────────────────────────────────────────────────────
+    "heartflow.com":            1000418,
+    # ── HTD Health ─────────────────────────────────────────────────────
+    "htdhealth.com":            1000420,
+    # ── Labviva ────────────────────────────────────────────────────────
+    "labviva.com":              1000430,
+    # ── Linus Health ───────────────────────────────────────────────────
+    "linushealth.com":          1000431,
+    # ── PictorLabs ─────────────────────────────────────────────────────
+    "pictorlabs.ai":            1000444,
+    # ── Sequel ─────────────────────────────────────────────────────────
+    "sequelmedtech.com":        1000450,
+    # ── ki:elements ────────────────────────────────────────────────────
+    "ki-elements.de":           1000784,
+    # ── Enovis ─────────────────────────────────────────────────────────
+    "enovis.com":               1001246,
+    # ── Huxley ─────────────────────────────────────────────────────────
+    "huxleymed.com":            1002899,
+    # ── Tachmed ────────────────────────────────────────────────────────
+    "tachmed.com":              1002911,
+    # ── Tactile ────────────────────────────────────────────────────────
+    "tactilemedical.com":       1002958,
+    # ── Revvity ────────────────────────────────────────────────────────
+    "revvity.com":              1003301,
+    # ── Alto ───────────────────────────────────────────────────────────
+    "altoneuroscience.com":     1003388,
+    # ── Optain ─────────────────────────────────────────────────────────
+    "optainhealth.com":         1004063,
+    # ── HOPPR ──────────────────────────────────────────────────────────
+    "hoppr.ai":                 1004065,
+    # ── Surgical Theater ───────────────────────────────────────────────
+    "surgicaltheater.com":      1004066,
+    "surgicaltheater.net":      1004066,
+    # ── Stryker ────────────────────────────────────────────────────────
+    "stryker.com":              1005660,
+    # ── Moberg Analytics ───────────────────────────────────────────────
+    "moberganalytics.com":      1017226,
+    # ── Quadrivia ──────────────────────────────────────────────────────
+    "quadrivia.ai":             1047506,
+    # ── GeneDx ─────────────────────────────────────────────────────────
+    "genedx.com":               1034070,
+    # ── SideKick ───────────────────────────────────────────────────────
+    "sidekickhealth.com":       1035238,
+    # ── Cytovale ───────────────────────────────────────────────────────
+    "cytovale.com":             1035261,
+    # ── Nutrino ────────────────────────────────────────────────────────
+    "nutrinohealth.com":        1037098,
+    # ── Curai ──────────────────────────────────────────────────────────
+    "curai.com":                1058509,
+    # ── Hippocratic AI ─────────────────────────────────────────────────
+    "hippocraticai.com":        1058511,
+    # ── Neurotrack ─────────────────────────────────────────────────────
+    "neurotrack.com":           1083276,
+    # ── REDCap Cloud ───────────────────────────────────────────────────
+    "redcapcloud.com":          1088856,
+    # ── MedCognetics ───────────────────────────────────────────────────
+    "medcognetics.com":         1088857,
+    # ── Atlas Medical ──────────────────────────────────────────────────
+    "atlasmed.ai":              1091467,
+    # ── Agiliti ────────────────────────────────────────────────────────
+    "agilitihealth.com":        1094411,
+    # ── Lumonus ────────────────────────────────────────────────────────
+    "lumonus.com":              1099020,
+    # ── Not mapped (no active Rocketlane project as of March 2026) ─────
+    # 10xbeta.com, beacon.bio, aignostics.com, foresight-dx.com,
+    # empyreanmed.com, florencehc.com, canaray.com, imagen.ai,
+    # iterativescopes.com, orikami.nl, talkiatry.com, vero-biotech.com,
+    # andromedasurgical.com, faeththerapeutics.com, marsbioimaging.com,
+    # owletcare.com, pathpresenter.com, rookqs.com, 360med.care,
+    # aetion.com, gexcorp.com, glucotrack.com, henkesasswolf.de,
+    # identifeye.health, iterative.health, jasprhealth.com, medlogix.eu,
+    # medice.de, neckcare.com, ouitherapeutics.com, oxos.com, ozlosleep.com,
+    # truesilencetherapeutics.com, abbott.com, bayer.com, bd.com,
+    # docboxinc.com, eforto.com, evidation.com, figur8tech.com, gaglani.com,
+    # galenrobotics.com, goengen.com, illumor.co, indd.org, iota.bio,
+    # kheironmed.com, kinomica.com, klinic.com, lambdasurgical.com,
+    # medicept.com, mocacognition.com, momentum.health, nephrodite.com,
+    # openai.com, patchmypc.com, physicalweb.com, prolaio.com, quantco.com,
+    # radnet.com, remedyrobotics.com, rlgmc.com, singulargenomics.com,
+    # swansurg.com, tandemhealth.ai, teloshealth.com, uniweb.eu, updoc.ai,
+    # vektormedical.com, vitrafy.com, wellframe.com, xion-medical.com
+}
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
@@ -312,10 +431,20 @@ def find_client_by_title(title: str) -> ClientProject | None:
 
 
 def find_client_by_domain(domain: str) -> ClientProject | None:
-    """Look up a client project by attendee email domain."""
+    """Look up a client project by attendee email domain.
+
+    First checks CLIENT_PROJECTS.domains (explicit config), then falls back
+    to HUBSPOT_DOMAIN_MAP which covers all known customer domains.
+    """
     for client in CLIENT_PROJECTS:
         if domain in client.domains:
             return client
+    # Fallback: HubSpot domain map — covers all closed-won customer domains
+    project_id = HUBSPOT_DOMAIN_MAP.get(domain)
+    if project_id:
+        for client in CLIENT_PROJECTS:
+            if client.project_id == project_id:
+                return client
     return None
 
 
