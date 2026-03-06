@@ -8,7 +8,7 @@ from pathlib import Path
 
 from typing import TYPE_CHECKING
 
-from .models import BillableType, Confidence, DayClassification
+from .models import Confidence, DayClassification
 
 if TYPE_CHECKING:
     from .users import UserConfig
@@ -42,35 +42,29 @@ def _truncate(s: str, n: int) -> str:
     return s if len(s) <= n else s[:n - 1] + "…"
 
 
-def _billable_label(event) -> str:
-    # Short codes to keep table width under Slack's ~84-char code block limit
-    if not event.billable:
-        return "—"
-    if event.billable_type == BillableType.INVESTMENT:
-        return "invest"
-    return "rept."
-
 
 def _build_table(day: DayClassification) -> str:
     """Build a fixed-width ASCII table for the tracked events.
 
-    Target total width ≤ 79 chars so Slack code blocks render as single lines.
-    Layout: Event(28) Project(22) Phase(20) Time(6) = 76 + 3 separators = 79.
+    Target total width = 79 chars so Slack code blocks render as single lines.
+    Layout: Event(26) Project(21) Phase(20) B/NB(2) Time(6) + 4 separators = 79.
     """
     tracked = [e for e in day.events if not e.skip]
 
-    W_TITLE = 28
-    W_PROJECT = 22
+    W_TITLE = 26
+    W_PROJECT = 21
     W_PHASE = 20
+    W_BILL = 2
     W_DUR = 6
 
     header = (
-        f"{'Event':<{W_TITLE}} {'Project':<{W_PROJECT}} {'Phase':<{W_PHASE}} {'Time':>{W_DUR}}"
+        f"{'Event':<{W_TITLE}} {'Project':<{W_PROJECT}} {'Phase':<{W_PHASE}} {'':>{W_BILL}} {'Time':>{W_DUR}}"
     )
     sep = "-" * len(header)
+    dot_sep = "·" * len(header)
 
     rows = [header, sep]
-    for e in tracked:
+    for i, e in enumerate(tracked):
         title = _truncate(e.event.title, W_TITLE)
         if e.project:
             proj = _truncate(e.project.project_name, W_PROJECT)
@@ -78,15 +72,21 @@ def _build_table(day: DayClassification) -> str:
         else:
             proj = _truncate(e.category or "unclassified", W_PROJECT)
             phase = "—"
+        bill = "B " if e.billable else "NB"
         dur = _fmt_minutes(e.duration_minutes)
         rows.append(
-            f"{title:<{W_TITLE}} {proj:<{W_PROJECT}} {phase:<{W_PHASE}} {dur:>{W_DUR}}"
+            f"{title:<{W_TITLE}} {proj:<{W_PROJECT}} {phase:<{W_PHASE}} {bill:<{W_BILL}} {dur:>{W_DUR}}"
         )
+        if i < len(tracked) - 1:
+            rows.append(dot_sep)
 
     rows.append(sep)
     total_dur = _fmt_minutes(day.total_tracked_minutes)
     billable_dur = _fmt_minutes(day.total_billable_minutes)
-    summary = f"{'Total: ' + total_dur:<{W_TITLE + W_PROJECT + W_PHASE + 2}}  {'Bill: ' + billable_dur:>{W_DUR}}"
+    bill_str = "Bill: " + billable_dur
+    # Dynamically compute left width so total = 79 regardless of bill_str length
+    left_width = len(sep) - 1 - len(bill_str)
+    summary = f"{'Total: ' + total_dur:<{left_width}} {bill_str}"
     rows.append(summary)
 
     return "\n".join(rows)
