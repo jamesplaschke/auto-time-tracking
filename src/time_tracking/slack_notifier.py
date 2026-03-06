@@ -43,26 +43,32 @@ def _truncate(s: str, n: int) -> str:
 
 
 def _billable_label(event) -> str:
+    # Short codes to keep table width under Slack's ~84-char code block limit
     if not event.billable:
-        return "non-billable"
+        return "—"
     if event.billable_type == BillableType.INVESTMENT:
-        return "investment"
-    return "reportable"
+        return "invest"
+    return "rept."
 
 
 def _build_table(day: DayClassification) -> str:
-    """Build a fixed-width ASCII table for the tracked events."""
+    """Build a fixed-width ASCII table for the tracked events.
+
+    Target total width ≤ 84 chars so Slack code blocks don't wrap.
+    Single-space column separators + short type codes free up room for
+    wider title/project/phase columns.
+    """
     tracked = [e for e in day.events if not e.skip]
 
-    # Column widths
-    W_TITLE = 26
-    W_PROJECT = 20
-    W_PHASE = 18
-    W_TYPE = 13   # "non-billable" is 12 chars
-    W_DUR = 6
+    # Column widths — total = 28+22+20+6+5 + 4 separators = 85 chars
+    W_TITLE = 28
+    W_PROJECT = 22
+    W_PHASE = 20
+    W_TYPE = 6    # "rept." / "invest" / "—"
+    W_DUR = 5
 
     header = (
-        f"{'Event':<{W_TITLE}}  {'Project':<{W_PROJECT}}  {'Phase':<{W_PHASE}}  {'Type':<{W_TYPE}}  {'Time':>{W_DUR}}"
+        f"{'Event':<{W_TITLE}} {'Project':<{W_PROJECT}} {'Phase':<{W_PHASE}} {'Type':<{W_TYPE}} {'Time':>{W_DUR}}"
     )
     sep = "-" * len(header)
 
@@ -78,13 +84,13 @@ def _build_table(day: DayClassification) -> str:
         label = _billable_label(e)
         dur = _fmt_minutes(e.duration_minutes)
         rows.append(
-            f"{title:<{W_TITLE}}  {proj:<{W_PROJECT}}  {phase:<{W_PHASE}}  {label:<{W_TYPE}}  {dur:>{W_DUR}}"
+            f"{title:<{W_TITLE}} {proj:<{W_PROJECT}} {phase:<{W_PHASE}} {label:<{W_TYPE}} {dur:>{W_DUR}}"
         )
 
     rows.append(sep)
     total_dur = _fmt_minutes(day.total_tracked_minutes)
     billable_dur = _fmt_minutes(day.total_billable_minutes)
-    summary = f"{'Total: ' + total_dur:<{W_TITLE + W_PROJECT + W_PHASE + W_TYPE + 6}}  {'Bill: ' + billable_dur:>{W_DUR}}"
+    summary = f"{'Total: ' + total_dur:<{W_TITLE + W_PROJECT + W_PHASE + W_TYPE + 3}}  {'Bill: ' + billable_dur:>{W_DUR}}"
     rows.append(summary)
 
     return "\n".join(rows)
