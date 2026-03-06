@@ -174,7 +174,15 @@ ENTERPRISE_GTM_POD_PROJECT_NAME = "Enterprise Account PODs"
 ENTERPRISE_GTM_POD_DEFAULT_PHASE_NAME = "Enterprise Pod Work Q1 2026"
 
 # Projects whose Rocketlane budget is non-billable — must be posted with billable=False
-NON_BILLABLE_ROCKETLANE_PROJECTS: set[int] = {ENTERPRISE_POD_PROJECT_ID, ENTERPRISE_GTM_POD_PROJECT_ID}
+INTERNAL_TOOLING_POD_PROJECT_ID = 1116583
+PRE_SALES_SUPPORT_PROJECT_ID = 1046918
+
+NON_BILLABLE_ROCKETLANE_PROJECTS: set[int] = {
+    ENTERPRISE_POD_PROJECT_ID,
+    ENTERPRISE_GTM_POD_PROJECT_ID,
+    INTERNAL_TOOLING_POD_PROJECT_ID,
+    1121886,  # Medtronic ACM
+}
 
 # ---------------------------------------------------------------------------
 # Overhead project and phases
@@ -348,6 +356,7 @@ INTERNAL_PROJECT_IDS: frozenset[int] = frozenset({
     ENTERPRISE_GTM_POD_PROJECT_ID,
     SUPPORT_TICKETS_PROJECT_ID,
     VALUE_ENGINEERING_PROJECT_ID,
+    PRE_SALES_SUPPORT_PROJECT_ID,  # too generic to match by title
 })
 
 # Generic words to ignore when extracting keywords from project names
@@ -355,7 +364,7 @@ _PROJECT_NAME_STOP_WORDS: frozenset[str] = frozenset({
     "and", "the", "for", "inc", "llc", "ltd", "rl", "general", "work",
     "post", "pre", "implementation", "project", "strategic", "support",
     "tickets", "overhead", "enterprise", "methodology", "pod", "account",
-    "pods", "value", "engineering", "q1", "q2", "q3", "q4",
+    "pods", "value", "engineering", "sales", "q1", "q2", "q3", "q4",
     "2024", "2025", "2026",
 })
 
