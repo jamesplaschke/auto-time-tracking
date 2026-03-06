@@ -28,6 +28,7 @@ from .config import (
     VALUE_ENGINEERING_PHASE_NAME,
     VALUE_ENGINEERING_PROJECT_ID,
     VALUE_ENGINEERING_PROJECT_NAME,
+    NON_BILLABLE_ROCKETLANE_PROJECTS,
     find_client_by_domain,
     find_client_by_title,
     find_client_in_cache,
@@ -343,4 +344,8 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
 
 def classify_events(events: list[CalendarEvent]) -> list[ClassifiedEvent]:
     """Classify a list of calendar events."""
-    return [classify_event(e) for e in events]
+    classified = [classify_event(e) for e in events]
+    for c in classified:
+        if c.project and c.project.project_id in NON_BILLABLE_ROCKETLANE_PROJECTS:
+            c.billable = False
+    return classified
