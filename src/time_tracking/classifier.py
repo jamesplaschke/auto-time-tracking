@@ -30,6 +30,7 @@ from .config import (
     VALUE_ENGINEERING_PROJECT_NAME,
     find_client_by_domain,
     find_client_by_title,
+    find_client_in_cache,
     get_domain,
     is_investment_title,
     is_support_ticket,
@@ -229,16 +230,7 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
                     notes=event.title,
                 )
 
-        # Unknown external domain — flag as low confidence
-        unknown_domains = ", ".join(sorted(client_domains))
-        return ClassifiedEvent(
-            event=event,
-            billable=False,
-            category=f"unknown-external:{unknown_domains}",
-            confidence=Confidence.LOW,
-            duration_minutes=duration,
-            notes=event.title,
-        )
+        # Unknown external domain — fall through to title matching below
 
     # Step 5.5: Title-pattern client match — catches solo work and internal meetings
     # whose title references a client (e.g. "philips config", "Philips Daily Internal Sync")
@@ -260,6 +252,31 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
                 project_id=project_id,
                 project_name=project_name,
                 phase_name=phase_name,
+            ),
+            confidence=Confidence.HIGH,
+            duration_minutes=duration,
+            notes=event.title,
+        )
+
+    # Step 5.7: Cache-based title match — checks ALL Rocketlane project names.
+    # Catches any client whose name appears in the event title but isn't in
+    # CLIENT_PROJECTS title_patterns (e.g. "Roche sync", "Dexcom call").
+    cache_match = find_client_in_cache(event.title)
+    if cache_match:
+        project_id, project_name = cache_match
+        billable_type = (
+            BillableType.INVESTMENT
+            if is_investment_title(event.title)
+            else BillableType.REPORTABLE
+        )
+        return ClassifiedEvent(
+            event=event,
+            billable=True,
+            billable_type=billable_type,
+            category=f"client:{project_name.lower().replace(' ', '-')}",
+            project=ProjectMapping(
+                project_id=project_id,
+                project_name=project_name,
             ),
             confidence=Confidence.HIGH,
             duration_minutes=duration,
@@ -302,12 +319,19 @@ def classify_event(event: CalendarEvent) -> ClassifiedEvent:
             notes=event.title,
         )
 
-    # Fallback: no attendees, no pattern match → low confidence
+    # Fallback: nothing matched → Overhead / Other Overhead
+    phase = match_overhead_phase(event.title)
     return ClassifiedEvent(
         event=event,
         billable=False,
-        category="unknown:no-match",
-        confidence=Confidence.LOW,
+        category=f"overhead:{phase.name.lower().replace(' ', '-')}",
+        project=ProjectMapping(
+            project_id=OVERHEAD_PROJECT_ID,
+            project_name=OVERHEAD_PROJECT_NAME,
+            phase_id=phase.phase_id,
+            phase_name=phase.name,
+        ),
+        confidence=Confidence.HIGH,
         duration_minutes=duration,
         notes=event.title,
     )

@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 
 
 # ---------------------------------------------------------------------------
@@ -319,3 +321,85 @@ def match_overhead_phase(title: str) -> OverheadPhase:
             return phase
     # Fallback to Other Overhead (last phase)
     return OVERHEAD_PHASES[-1]
+
+
+# ---------------------------------------------------------------------------
+# Cache-based client lookup (matches any Rocketlane project name)
+# ---------------------------------------------------------------------------
+
+_CACHE_PATH = Path(__file__).resolve().parent.parent.parent / "cache" / "rocketlane_projects_phases.json"
+
+# Internal project IDs — excluded from cache-based client matching
+INTERNAL_PROJECT_IDS: frozenset[int] = frozenset({
+    OVERHEAD_PROJECT_ID,
+    ENTERPRISE_POD_PROJECT_ID,
+    ENTERPRISE_GTM_POD_PROJECT_ID,
+    SUPPORT_TICKETS_PROJECT_ID,
+    VALUE_ENGINEERING_PROJECT_ID,
+})
+
+# Generic words to ignore when extracting keywords from project names
+_PROJECT_NAME_STOP_WORDS: frozenset[str] = frozenset({
+    "and", "the", "for", "inc", "llc", "ltd", "rl", "general", "work",
+    "post", "pre", "implementation", "project", "strategic", "support",
+    "tickets", "overhead", "enterprise", "methodology", "pod", "account",
+    "pods", "value", "engineering", "q1", "q2", "q3", "q4",
+    "2024", "2025", "2026",
+})
+
+_rocketlane_cache: dict | None = None
+
+
+def _get_rocketlane_cache() -> dict:
+    global _rocketlane_cache
+    if _rocketlane_cache is not None:
+        return _rocketlane_cache
+    if not _CACHE_PATH.exists():
+        _rocketlane_cache = {}
+        return {}
+    try:
+        _rocketlane_cache = json.loads(_CACHE_PATH.read_text())
+    except Exception:
+        _rocketlane_cache = {}
+    return _rocketlane_cache
+
+
+def find_client_in_cache(title: str) -> tuple[int, str] | None:
+    """Match event title against all Rocketlane project names.
+
+    Extracts meaningful keywords from each project name and checks if they
+    appear in the event title. Returns (project_id, project_name) of the
+    best match, or None if no match found.
+    """
+    cache = _get_rocketlane_cache()
+    if not cache:
+        return None
+
+    title_lower = title.lower()
+    best: tuple[int, str] | None = None
+    best_score = 0
+
+    for pid_str, project in cache.items():
+        pid = int(pid_str)
+        if pid in INTERNAL_PROJECT_IDS:
+            continue
+
+        project_name = project.get("name", "") if isinstance(project, dict) else str(project)
+        if not project_name:
+            continue
+
+        # Extract meaningful keywords from project name
+        words = re.split(r"[^a-zA-Z0-9]+", project_name)
+        keywords = [
+            w.lower() for w in words
+            if len(w) >= 3 and w.lower() not in _PROJECT_NAME_STOP_WORDS
+        ]
+        if not keywords:
+            continue
+
+        matched = sum(1 for kw in keywords if kw in title_lower)
+        if matched > 0 and matched > best_score:
+            best_score = matched
+            best = (pid, project_name)
+
+    return best
