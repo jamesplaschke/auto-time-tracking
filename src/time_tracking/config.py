@@ -97,9 +97,21 @@ CLIENT_PROJECTS: list[ClientProject] = [
         ],
     ),
     ClientProject(
+        name="Flo Health",
+        project_id=1000411,
+        domains=["flo.health"],
+        title_patterns=[
+            re.compile(r"\bflo\b", re.IGNORECASE),
+        ],
+        default_phase_name="Continuous Improvement",
+    ),
+    ClientProject(
         name="Roche nCH",
         project_id=1000449,
         domains=["roche.com", "gene.com"],
+        title_patterns=[
+            re.compile(r"\broche\b", re.IGNORECASE),
+        ],
         disambiguate={
             "nDP": (1001080, "Roche nDP"),
         },
@@ -386,6 +398,143 @@ def _get_rocketlane_cache() -> dict:
     return _rocketlane_cache
 
 
+# ---------------------------------------------------------------------------
+# Auto-population of CLIENT_PROJECTS from Rocketlane cache
+# ---------------------------------------------------------------------------
+
+# Ketryx-internal project IDs — not client work, skip auto-loading
+_KETRYX_INTERNAL_PROJECT_IDS: frozenset[int] = frozenset({
+    1034013,  # Adrian - Internal
+    1022417,  # Business Case Presentation for LT
+    1000391,  # Client Intelligence POD
+    1000393,  # Client Operations Leadership
+    1096200,  # Client Operations Onboarding - Gideon F
+    1020628,  # Jolani Internal
+    1004499,  # Kevin B - Internal
+    1045980,  # Lee Internal
+    1069828,  # QA/RA - Internal
+    992170,   # QMS Templates
+    1002637,  # Quality
+    1047256,  # Rocketlane test
+    1035211,  # SMB Investment
+    1000451,  # SMB POD
+    1021612,  # Solutions Architecture POD
+    1000453,  # Support Overhaul
+    1103253,  # Product x Client Request Tracker
+})
+
+# Qualifier phrases stripped before extracting brand name from project name
+_NAME_QUALIFIER_PATTERN = re.compile(
+    r"\b(new\s+deal|implementation|strategic|steady\s+state|"
+    r"post.implementation|account\s+management|priority\s+projects|"
+    r"general\s+work|internal\s+only|phase\s+\d+|q[1-4]\s+\d{4}|pilot|"
+    r"post.deployment|project\s+stitch|sports?\s+medicine)\b",
+    re.IGNORECASE,
+)
+
+# Generic company-type suffixes stripped when more words remain
+_COMPANY_SUFFIX_PATTERN = re.compile(
+    r"\b(health|medical|therapeutics|analytics|robotics|cloud|"
+    r"labs?|sciences?|diagnostics|biomedical|biotechnology|imaging|"
+    r"surgical|biosciences?)\b",
+    re.IGNORECASE,
+)
+
+_ACTIVE_STATUSES = {"In progress", "To be Staffed", "In Planning", "In Planning (Internal)"}
+_PHASE_HOUSEKEEPING = re.compile(
+    r"housekeeping|pre.kick|presales|backlog|untitled|milestone", re.IGNORECASE
+)
+
+
+_BRAND_NAME_NOISE = frozenset({
+    # Generic pronouns / articles that slip through stop-word filter
+    "my", "our", "the", "its",
+    # Ketryx-internal terms that appear in project names but mean nothing in event titles
+    "ketryx", "professional", "services", "rl",
+})
+
+
+def _brand_name_keywords(project_name: str) -> list[str]:
+    """Extract brand-name keywords from a Rocketlane project name.
+
+    Strips qualifier phrases (phase, year, deal status) and generic company
+    suffixes, returning the core identifying words people actually use in
+    event titles (e.g. "Click Therapeutics Q1 2026" → ["click"]).
+    """
+    name = _NAME_QUALIFIER_PATTERN.sub("", project_name)
+    # Only strip company suffixes if meaningful words remain after stripping
+    stripped = _COMPANY_SUFFIX_PATTERN.sub("", name).strip()
+    remaining = [w for w in re.split(r"[^a-zA-Z0-9&+]+", stripped) if len(w) >= 3]
+    words = re.split(r"[^a-zA-Z0-9&+]+", stripped if remaining else name)
+    keywords = [
+        w for w in words
+        if len(w) >= 3
+        and w.lower() not in _PROJECT_NAME_STOP_WORDS
+        and w.lower() not in _BRAND_NAME_NOISE
+    ]
+    return keywords
+
+
+def _auto_load_client_projects() -> None:
+    """Append a ClientProject entry for every active Rocketlane project not
+    already explicitly configured.  Called once at module import time so the
+    full project list is always current with the cache."""
+    # Collect every project ID already handled (explicit + disambiguate targets)
+    configured_ids: set[int] = {c.project_id for c in CLIENT_PROJECTS}
+    for c in CLIENT_PROJECTS:
+        if c.disambiguate:
+            for _, (pid, _) in c.disambiguate.items():
+                configured_ids.add(pid)
+
+    skip_ids = INTERNAL_PROJECT_IDS | _KETRYX_INTERNAL_PROJECT_IDS | configured_ids
+
+    cache = _get_rocketlane_cache()
+    for pid_str, project in sorted(cache.items(), key=lambda x: x[0]):
+        pid = int(pid_str)
+        if pid in skip_ids:
+            continue
+        if not isinstance(project, dict):
+            continue
+        if project.get("status") not in _ACTIVE_STATUSES:
+            continue
+
+        project_name = project.get("name", "")
+        if not project_name:
+            continue
+
+        keywords = _brand_name_keywords(project_name)
+        if not keywords:
+            continue
+
+        # Build pattern from the minimum keywords needed to identify the client.
+        # If the first keyword is long/distinctive (≥5 chars), use it alone.
+        # If it's short (≤4 chars, e.g. "ART", "IND"), add a second keyword for
+        # disambiguation. People write "Agilent kickoff" not "Agilent Atlassian kickoff".
+        if len(keywords[0]) >= 5:
+            match_keywords = keywords[:1]
+        else:
+            match_keywords = keywords[:2]
+        parts = "".join(r"(?=.*\b" + re.escape(kw) + r"\b)" for kw in match_keywords)
+        pattern = re.compile(parts, re.IGNORECASE)
+
+        # Pick first non-housekeeping phase as default
+        phases = project.get("phases", [])
+        default_phase = next(
+            (p["name"] for p in phases if not _PHASE_HOUSEKEEPING.search(p.get("name", ""))),
+            phases[0]["name"] if phases else None,
+        )
+
+        CLIENT_PROJECTS.append(ClientProject(
+            name=project_name,
+            project_id=pid,
+            title_patterns=[pattern],
+            default_phase_name=default_phase,
+        ))
+
+
+_auto_load_client_projects()
+
+
 def find_client_in_cache(title: str) -> tuple[int, str] | None:
     """Match event title against all Rocketlane project names.
 
@@ -420,7 +569,14 @@ def find_client_in_cache(title: str) -> tuple[int, str] | None:
             continue
 
         matched = sum(1 for kw in keywords if re.search(r'\b' + re.escape(kw) + r'\b', title_lower))
-        if matched > 0 and matched > best_score:
+        # Require coverage proportional to number of keywords:
+        # 1-keyword projects → keyword must be ≥6 chars (avoids short names like "flo", "gex")
+        # 2+ keyword projects → at least half must match
+        if len(keywords) == 1:
+            required = 1 if len(keywords[0]) >= 6 else 999  # short single-kw → never auto-match
+        else:
+            required = max(1, len(keywords) // 2)
+        if matched >= required and matched > best_score:
             best_score = matched
             best = (pid, project_name)
 
