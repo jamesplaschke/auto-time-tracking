@@ -364,8 +364,9 @@ _PROJECT_NAME_STOP_WORDS: frozenset[str] = frozenset({
     "and", "the", "for", "inc", "llc", "ltd", "rl", "general", "work",
     "post", "pre", "implementation", "project", "strategic", "support",
     "tickets", "overhead", "enterprise", "methodology", "pod", "account",
-    "pods", "value", "engineering", "sales", "q1", "q2", "q3", "q4",
-    "2024", "2025", "2026",
+    "pods", "value", "engineering", "sales", "internal", "venture", "studios",
+    "new", "deal", "pilot", "phase", "priority", "steady", "state",
+    "q1", "q2", "q3", "q4", "2024", "2025", "2026",
 })
 
 _rocketlane_cache: dict | None = None
@@ -418,7 +419,7 @@ def find_client_in_cache(title: str) -> tuple[int, str] | None:
         if not keywords:
             continue
 
-        matched = sum(1 for kw in keywords if kw in title_lower)
+        matched = sum(1 for kw in keywords if re.search(r'\b' + re.escape(kw) + r'\b', title_lower))
         if matched > 0 and matched > best_score:
             best_score = matched
             best = (pid, project_name)
