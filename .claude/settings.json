@@ -13,6 +13,7 @@
       "Bash(git push:*)",
       "Bash(python:*)",
       "Bash(python3:*)",
+      "Bash(cd:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(bash setup.sh:*)",
