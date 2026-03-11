@@ -1,22 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(uv run:*)",
-      "Bash(uv sync:*)",
-      "Bash(pull-my-time-for:*)",
-      "Bash(post-my-time-for:*)",
-      "Bash(time-tracking-train:*)",
-      "Bash(time-tracking-listener:*)",
-      "Bash(git pull:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(python:*)",
-      "Bash(python3:*)",
-      "Bash(cd:*)",
-      "Bash(ls:*)",
-      "Bash(cat:*)",
-      "Bash(bash setup.sh:*)",
+      "Bash",
       "Read",
       "Write",
       "Edit",
