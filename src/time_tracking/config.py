@@ -165,7 +165,7 @@ VALUE_ENGINEERING_PHASE_NAME = "ROI Calculator"
 
 # Enterprise Methodology Pod — "enterprise methodology/pod" events → project 1000405
 ENTERPRISE_POD_PATTERN = re.compile(
-    r"enterprise\s+(methodology|pod)",
+    r"enterprise\s+(method\w*ogy|pod)",
     re.IGNORECASE,
 )
 ENTERPRISE_POD_PROJECT_ID = 1000405
@@ -269,6 +269,7 @@ SKIP_TITLE_PATTERNS: list[re.Pattern] = [
     # Recurring internal sessions not tracked
     re.compile(r"wiring\s+to\s+win", re.IGNORECASE),
     re.compile(r"\bwater\s+polo\b", re.IGNORECASE),
+    re.compile(r"\bbruins\b", re.IGNORECASE),
 ]
 
 # Events with these titles are investment (not reportable) for client projects
