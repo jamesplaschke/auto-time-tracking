@@ -20,8 +20,8 @@ IGNORED_DOMAINS = {
     "calendar.google.com",
     "group.calendar.google.com",
 }
-MIN_DURATION_MINUTES = 30
-ROUNDING_INCREMENT_MINUTES = 30
+MIN_DURATION_MINUTES = 1
+ROUNDING_INCREMENT_MINUTES = 1
 
 # ---------------------------------------------------------------------------
 # Time entry category IDs (from GET /time-entries/categories)
