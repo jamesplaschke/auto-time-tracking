@@ -165,7 +165,7 @@ VALUE_ENGINEERING_PHASE_NAME = "ROI Calculator"
 
 # Enterprise Methodology Pod — "enterprise methodology/pod" events → project 1000405
 ENTERPRISE_POD_PATTERN = re.compile(
-    r"enterprise\s+(method\w*ogy|pod)",
+    r"enterprise\s+(meth\w+|pod)",
     re.IGNORECASE,
 )
 ENTERPRISE_POD_PROJECT_ID = 1000405
