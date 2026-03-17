@@ -189,7 +189,7 @@ def _post_entries(entries: list[dict], dry_run: bool = False, api_key: str | Non
     console.print(f"[bold]Done:[/bold] {success} posted, {failed} failed.")
 
 
-def post_day(day: DayClassification, api_key: str | None = None) -> tuple[int, int]:
+def post_day(day: DayClassification, api_key: str | None = None, user_email: str | None = None) -> tuple[int, int]:
     """Post a DayClassification to Rocketlane without any prompts or console output.
 
     Returns (posted_count, skipped_count). Raises on hard errors.
@@ -199,7 +199,7 @@ def post_day(day: DayClassification, api_key: str | None = None) -> tuple[int, i
     if not entries:
         return 0, 0
 
-    entries = check_duplicates(day.date, entries, api_key=api_key)
+    entries = check_duplicates(day.date, entries, api_key=api_key, user_email=user_email)
     if not entries:
         return 0, 0
 
@@ -244,7 +244,8 @@ def process_date(
 
     # Check for duplicates (skip in dry-run to avoid unnecessary API calls)
     if not dry_run:
-        entries = check_duplicates(date_str, entries, api_key=api_key)
+        user_email = user.email if user else None
+        entries = check_duplicates(date_str, entries, api_key=api_key, user_email=user_email)
         if not entries:
             console.print(f"[dim]All entries already exist for {date_str}.[/dim]")
             return

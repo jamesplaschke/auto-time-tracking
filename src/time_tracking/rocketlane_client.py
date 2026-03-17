@@ -301,13 +301,15 @@ def update_time_entry(
     return _request(f"/time-entries/{entry_id}", method="PUT", json_body=body)
 
 
-def check_duplicates(date_str: str, entries_to_post: list[dict], api_key: str | None = None) -> list[dict]:
+def check_duplicates(date_str: str, entries_to_post: list[dict], api_key: str | None = None, user_email: str | None = None) -> list[dict]:
     """Check for existing entries and return only new ones.
 
     Matches by (minutes, project_id, phase_id, category_id) since the API
     does not return notes in time entry list responses.
     """
     existing = get_time_entries(date_str, api_key=api_key)
+    if user_email:
+        existing = [e for e in existing if e.get("user", {}).get("emailId") == user_email]
     existing_keys = {
         (
             e.get("minutes", 0),

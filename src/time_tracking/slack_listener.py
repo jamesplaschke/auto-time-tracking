@@ -101,7 +101,7 @@ def handle_button(web_client, payload: dict) -> None:
 
         day = _load_day(date_str, user=user)
         populate_overhead_phase_ids()
-        posted, failed = post_day(day, api_key=api_key)
+        posted, failed = post_day(day, api_key=api_key, user_email=user.email if user else None)
 
         if posted == 0 and failed == 0:
             result_text = "✅ All entries already posted — nothing new to add."
@@ -184,7 +184,7 @@ def handle_message(web_client, event: dict) -> None:
         # Auto-post to Rocketlane
         try:
             from .post_time_entries import post_day
-            posted, skipped = post_day(updated_day, api_key=api_key)
+            posted, skipped = post_day(updated_day, api_key=api_key, user_email=user.email if user else None)
             post_note = f"\n✓ {posted} entr{'y' if posted == 1 else 'ies'} posted to Rocketlane ({skipped} already existed)"
         except Exception as post_err:
             post_note = f"\n⚠️ Rocketlane post failed: {post_err} — changes saved locally"
