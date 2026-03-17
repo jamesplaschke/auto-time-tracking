@@ -145,6 +145,7 @@ CLIENT_PROJECTS: list[ClientProject] = [
         domains=["medtronic.com"],
         title_patterns=[
             re.compile(r"\bmedtronic\b", re.IGNORECASE),
+            re.compile(r"\bacm\b", re.IGNORECASE),
         ],
         disambiguate={
             "stitch": (1017352, "Medtronic - Project Stitch"),
