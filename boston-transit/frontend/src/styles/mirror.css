@@ -1,0 +1,96 @@
+/* Smart Mirror Mode: high contrast, large text, black background */
+body.mirror-mode {
+  background: #000;
+  cursor: none;
+}
+
+body.mirror-mode * {
+  cursor: none;
+}
+
+body.mirror-mode #header {
+  background: #000;
+  border-bottom-color: #222;
+  height: 80px;
+}
+
+body.mirror-mode .header-left h1 {
+  display: none;
+}
+
+body.mirror-mode #clock {
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: 300;
+}
+
+body.mirror-mode .header-right {
+  display: none;
+}
+
+body.mirror-mode #stops-grid {
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+  padding: 24px;
+}
+
+body.mirror-mode .stop-card {
+  background: #0a0a0a;
+  border-color: #222;
+}
+
+body.mirror-mode .stop-card-header {
+  border-bottom-color: #222;
+  padding: 18px 20px;
+}
+
+body.mirror-mode .stop-card-header .stop-name {
+  font-size: 1.4rem;
+}
+
+body.mirror-mode .direction-group {
+  padding: 14px 20px;
+}
+
+body.mirror-mode .direction-group + .direction-group {
+  border-top-color: #222;
+}
+
+body.mirror-mode .prediction-countdown {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  min-width: 120px;
+}
+
+body.mirror-mode .prediction-unit {
+  font-size: 1rem;
+}
+
+body.mirror-mode .prediction-status {
+  font-size: 1.1rem;
+}
+
+body.mirror-mode .leave-now-alert {
+  font-size: 1.3rem;
+  padding: 20px 24px;
+}
+
+body.mirror-mode .leave-now-time {
+  font-size: 2rem;
+}
+
+body.mirror-mode .alert-banner {
+  font-size: 1.1rem;
+}
+
+body.mirror-mode .no-predictions {
+  font-size: 1.1rem;
+}
+
+/* Auto-hide cursor after inactivity (JS adds/removes this) */
+body.mirror-mode.cursor-visible {
+  cursor: default;
+}
+
+body.mirror-mode.cursor-visible * {
+  cursor: default;
+}

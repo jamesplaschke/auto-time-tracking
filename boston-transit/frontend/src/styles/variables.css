@@ -1,0 +1,37 @@
+:root {
+  /* MBTA line colors */
+  --color-red: #DA291C;
+  --color-orange: #ED8B00;
+  --color-blue: #003DA5;
+  --color-green: #00843D;
+
+  /* UI colors */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-card: #1e2538;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --text-muted: #5f6368;
+  --border-color: #2d3548;
+
+  /* Alert urgency colors */
+  --urgency-now: #ff4444;
+  --urgency-soon: #ffaa00;
+  --urgency-upcoming: #4488ff;
+  --urgency-missed: #666;
+
+  /* Service alert colors */
+  --alert-bg: #3d2800;
+  --alert-border: #ffaa00;
+  --alert-severe-bg: #3d0000;
+  --alert-severe-border: #ff4444;
+
+  /* Sizing */
+  --card-radius: 12px;
+  --countdown-font-size: 2rem;
+  --header-height: 60px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}

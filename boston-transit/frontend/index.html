@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Never Miss the T</title>
+    <link rel="stylesheet" href="/src/styles/variables.css" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <link rel="stylesheet" href="/src/styles/mirror.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header id="header">
+        <div class="header-left">
+          <h1>Never Miss the T</h1>
+          <span id="clock"></span>
+        </div>
+        <div class="header-right">
+          <button id="mirror-toggle" title="Toggle mirror mode">🪞</button>
+          <button id="settings-toggle" title="Settings">⚙️</button>
+        </div>
+      </header>
+
+      <div id="alerts-container"></div>
+
+      <div id="leave-now-container"></div>
+
+      <main id="stops-grid"></main>
+
+      <div id="settings-panel" class="hidden">
+        <div class="settings-overlay"></div>
+        <div class="settings-content">
+          <div class="settings-header">
+            <h2>Settings</h2>
+            <button id="settings-close">&times;</button>
+          </div>
+          <div id="settings-body"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
